@@ -109,7 +109,6 @@ export default function CheckoutPage() {
         else if (!/^[6-9]\d{9}$/.test(phone.replace(/\s/g, ''))) newErrors.phone = 'Enter valid 10-digit number';
         if (!email.trim()) newErrors.email = 'Email is required';
         else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Enter valid email';
-        if (!selectedSlot) newErrors.slot = 'Please select a time slot';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
