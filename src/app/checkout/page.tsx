@@ -310,7 +310,7 @@ export default function CheckoutPage() {
                     <div className={styles.footerInfo}>
                         {selectedSlot && (
                             <span className={styles.selectedSlotInfo}>
-                                📅 {selectedSlot.date} at {selectedSlot.time}
+                                📅 {new Date(selectedSlot.date).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })} at {selectedSlot.time}
                             </span>
                         )}
                     </div>

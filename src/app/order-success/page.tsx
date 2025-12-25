@@ -70,7 +70,9 @@ export default function OrderSuccessPage() {
                             </div>
                             <div className={styles.orderRow}>
                                 <span className={styles.orderLabel}>Selected Slot</span>
-                                <span className={styles.orderValue}>{booking.date} at {booking.time}</span>
+                                <span className={styles.orderValue}>
+                                    {new Date(booking.date).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })} at {booking.time}
+                                </span>
                             </div>
                         </>
                     )}
