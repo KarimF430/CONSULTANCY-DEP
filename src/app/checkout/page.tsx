@@ -275,14 +275,8 @@ export default function CheckoutPage() {
                     </div>
                 </div>
 
-                {/* Slot Picker */}
-                <div className={styles.slotSection}>
-                    <SlotPicker
-                        selectedSlot={selectedSlot}
-                        onSelectSlot={setSelectedSlot}
-                    />
-                    {errors.slot && <span className={styles.errorText}>{errors.slot}</span>}
-                </div>
+
+
 
                 {/* Payment Methods */}
                 <div className={styles.section}>
