@@ -1,0 +1,422 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 16px 120px;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.backBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.backBtn:hover {
+    background: #f1f5f9;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Savings Banner */
+.savingsBanner {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border: 1px solid #a7f3d0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #059669;
+}
+
+.savingsIcon {
+    font-size: 20px;
+}
+
+/* Plan Card */
+.planCard {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+}
+
+.planHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.planIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.planInfo {
+    flex: 1;
+}
+
+.planTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.planDetail {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.planPrice {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.currency {
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.planDesc {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.removeBtn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Coupon Section */
+.couponSection {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.couponIcon,
+.billIcon {
+    font-size: 18px;
+}
+
+.couponInputWrapper {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.couponInput {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.couponInput:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.applyBtn {
+    padding: 12px 24px;
+    background: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.applyBtn:hover {
+    background: #1e293b;
+}
+
+.couponError {
+    color: #ef4444;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.couponSuccessMsg {
+    color: #059669;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.appliedCoupon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ecfdf5;
+    border: 1px dashed #10b981;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+}
+
+.appliedCouponInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.couponBadge {
+    background: #10b981;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.couponSaving {
+    color: #059669;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.removeCouponBtn {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.availableCoupons {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed #e2e8f0;
+}
+
+.availableTitle {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.couponList {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.couponTag {
+    padding: 6px 12px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.couponTag:hover {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+}
+
+/* Bill Summary */
+.billSummary {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.billRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #475569;
+}
+
+.discountRow .discountAmount {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.billDivider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 8px 0;
+}
+
+.totalRow {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.totalAmount {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+/* Sticky Footer */
+.stickyFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 16px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+}
+
+.proceedBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 568px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.proceedBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.proceedAmount {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Empty Cart */
+.emptyCart {
+    max-width: 400px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 40px 24px;
+}
+
+.emptyIcon {
+    font-size: 64px;
+    margin-bottom: 24px;
+}
+
+.emptyCart h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.emptyCart p {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 28px;
+}
+
+.browseBtn {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.browseBtn:hover {
+    background: #1d4ed8;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 12px 120px;
+    }
+
+    .planPrice {
+        font-size: 20px;
+    }
+
+    .couponInputWrapper {
+        flex-direction: column;
+    }
+
+    .applyBtn {
+        width: 100%;
+    }
+}

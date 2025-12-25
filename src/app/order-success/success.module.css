@@ -1,0 +1,213 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+}
+
+.card {
+    background: white;
+    border-radius: 24px;
+    padding: 48px 32px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* Success Icon */
+.successIcon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #64748b;
+    margin-bottom: 32px;
+}
+
+/* Order Details */
+.orderDetails {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 28px;
+}
+
+.orderRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.orderRow:last-child {
+    border-bottom: none;
+}
+
+.orderLabel {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.orderId {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    font-family: monospace;
+    background: #e2e8f0;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.orderValue {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.orderAmount {
+    font-size: 18px;
+    font-weight: 800;
+    color: #10b981;
+}
+
+/* Next Steps */
+.nextSteps {
+    text-align: left;
+    margin-bottom: 32px;
+}
+
+.stepsTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.stepsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.stepsList li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 14px;
+    color: #475569;
+}
+
+.stepNumber {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #10b981;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.homeBtn {
+    display: block;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.homeBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.plansBtn {
+    display: block;
+    background: none;
+    border: none;
+    color: #64748b;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.plansBtn:hover {
+    color: #0f172a;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .card {
+        padding: 32px 20px;
+        border-radius: 20px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .successIcon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .successIcon svg {
+        width: 48px;
+        height: 48px;
+    }
+}

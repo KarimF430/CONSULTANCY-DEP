@@ -1,0 +1,349 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 16px 120px;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.backBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.backBtn:hover {
+    background: #f1f5f9;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Order Summary */
+.orderSummary {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #bfdbfe;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+}
+
+.summaryHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.summaryHeader h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.editLink {
+    font-size: 13px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.summaryContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.planName {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.planAmount {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.originalPrice {
+    font-size: 14px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+/* Section */
+.section {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.sectionIcon {
+    font-size: 18px;
+}
+
+/* Form */
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* Time Slots */
+.timeSlots {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.timeSlotBtn {
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.timeSlotBtn:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+}
+
+.timeSlotActive {
+    border-color: #2563eb;
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+/* Payment Methods */
+.paymentMethods {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.paymentBtn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.paymentBtn:hover {
+    border-color: #cbd5e1;
+}
+
+.paymentActive {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.paymentIcon {
+    font-size: 24px;
+    width: 40px;
+    text-align: center;
+}
+
+.paymentInfo {
+    flex: 1;
+}
+
+.paymentLabel {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 2px;
+}
+
+.paymentSub {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.paymentRadio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paymentActive .paymentRadio {
+    border-color: #2563eb;
+}
+
+.radioInner {
+    width: 10px;
+    height: 10px;
+    background: #2563eb;
+    border-radius: 50%;
+}
+
+/* Sticky Footer */
+.stickyFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 16px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+}
+
+.payBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 568px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.payBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.payBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Empty State */
+.emptyState {
+    max-width: 400px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 40px 24px;
+}
+
+.emptyIcon {
+    font-size: 64px;
+    margin-bottom: 24px;
+}
+
+.emptyState h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.emptyState p {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 28px;
+}
+
+.browseBtn {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 12px 120px;
+    }
+}

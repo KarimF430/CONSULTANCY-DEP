@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import styles from './plans.module.css';
 import ConsultationModal from '../ConsultationModal';
 import Footer from '@/components/Footer';
 import ExitIntentModal from '@/components/ExitIntentModal';
+import { useCart } from '@/context/CartContext';
 
 const plans = [
     {
@@ -125,9 +127,17 @@ const experts = [
 ];
 
 export default function PlansPage() {
+    const router = useRouter();
+    const { addToCart } = useCart();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedExpert, setSelectedExpert] = useState<typeof experts[0] | null>(null);
     const topRef = useRef<HTMLDivElement>(null);
+
+    // Handle plan selection -> add to cart and navigate
+    const handleSelectPlan = (plan: typeof plans[0]) => {
+        addToCart(plan);
+        router.push('/cart');
+    };
 
     // Exit Intent Modal State
     const [showExitModal, setShowExitModal] = useState(false);
@@ -282,7 +292,7 @@ export default function PlansPage() {
 
                             <p className={styles.cardDesc}>{plan.description}</p>
 
-                            <button onClick={() => setIsModalOpen(true)} className={styles.btnPrimary}>Select Plan</button>
+                            <button onClick={() => handleSelectPlan(plan)} className={styles.btnPrimary}>Select Plan</button>
                         </div>
                     ))}
                 </div>
