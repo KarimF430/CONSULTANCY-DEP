@@ -124,55 +124,56 @@ export default function CheckoutPage() {
         setIsProcessing(true);
 
         try {
-            // Simulate payment processing
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // Store booking info for success page (before redirect)
+            const orderId = `CAR${Date.now().toString().slice(-8)}`;
+            sessionStorage.setItem('lastBooking', JSON.stringify({
+                orderId,
+                name,
+                email,
+                phone,
+                planName: cartItems[0]?.title || 'Consultation',
+                amount: getTotal(),
+            }));
 
-            // For demo, randomly succeed or fail (80% success rate)
-            const paymentSuccess = Math.random() > 0.2;
-
-            if (!paymentSuccess) {
-                router.push('/order-failed');
-                return;
-            }
-
-            // Payment successful - Get Calendly scheduling URL
-            const calendlyResponse = await fetch('/api/calendly/book', {
+            // Create PayU payment order
+            const payuResponse = await fetch('/api/payu', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     name,
                     email,
                     phone,
-                    date: selectedSlot?.date,
-                    time: selectedSlot?.time,
+                    amount: getTotal(),
                     planName: cartItems[0]?.title || 'Consultation',
+                    orderId,
                 }),
             });
 
-            let schedulingUrl = '';
-            const orderId = `CAR${Date.now().toString().slice(-8)}`;
+            const payuData = await payuResponse.json();
 
-            if (calendlyResponse.ok) {
-                const calendlyData = await calendlyResponse.json();
-                schedulingUrl = calendlyData.schedulingUrl || '';
+            if (!payuResponse.ok || !payuData.success) {
+                throw new Error(payuData.error || 'Payment initialization failed');
             }
 
-            // Store booking info for success page
-            sessionStorage.setItem('lastBooking', JSON.stringify({
-                orderId,
-                name,
-                email,
-                date: selectedSlot?.date,
-                time: selectedSlot?.time,
-                planName: cartItems[0]?.title || 'Consultation',
-                schedulingUrl,
-            }));
+            // Create hidden form and submit to PayU
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = payuData.paymentUrl;
 
-            router.push('/order-success');
+            Object.entries(payuData.params).forEach(([key, value]) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value as string;
+                form.appendChild(input);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
+
         } catch (error) {
-            console.error('Payment/booking error:', error);
+            console.error('Payment error:', error);
             router.push('/order-failed');
-        } finally {
             setIsProcessing(false);
         }
     };
