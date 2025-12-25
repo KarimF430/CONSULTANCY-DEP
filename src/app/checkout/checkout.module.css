@@ -618,3 +618,48 @@
     padding-top: 16px;
     margin-top: 10px;
 }
+
+/* Secure Payment Notice */
+.securePayment {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+    border-radius: 12px;
+    border: 1px solid #bbf7d0;
+}
+
+.securePaymentInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.secureTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #059669;
+}
+
+.secureDesc {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.paymentBadges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+}
