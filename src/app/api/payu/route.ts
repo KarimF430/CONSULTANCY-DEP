@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 
-const PAYU_MERCHANT_KEY = process.env.PAYU_MERCHANT_KEY || 'JPM7Fg';  // Test key
-const PAYU_MERCHANT_SALT = process.env.PAYU_MERCHANT_SALT || 'MIIEvgIBADANB';  // Test salt
+// PayU Official Test/Sandbox Credentials
+const PAYU_MERCHANT_KEY = process.env.PAYU_MERCHANT_KEY || 'gtKFFx';
+const PAYU_MERCHANT_SALT = process.env.PAYU_MERCHANT_SALT || 'eCwWELxi';
 const PAYU_BASE_URL = process.env.PAYU_MODE === 'LIVE'
     ? 'https://secure.payu.in/_payment'
     : 'https://test.payu.in/_payment';
