@@ -69,9 +69,9 @@ export default function FeedbackForm() {
         <section className={styles.container}>
             <div className={styles.wrapper}>
                 <div className={styles.header}>
-                    <h2 className={styles.title}>Share Your Feedback</h2>
+                    <h2 className={styles.title}>Help Us Help You Better</h2>
                     <p className={styles.subtitle}>
-                        Help us improve by sharing your thoughts about our services
+                        Your 30-second feedback shapes how we serve thousands of car buyers
                     </p>
                 </div>
 

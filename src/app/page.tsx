@@ -94,10 +94,10 @@ export default function Home() {
                     <div className={styles.offersLayout}>
                         {/* Sidebar Header */}
                         <div className={styles.offersHeader}>
-                            <span className={styles.offersLabel}>Services</span>
-                            <h2 className={styles.offersTitle}>Comprehensive guidance at every step</h2>
+                            <span className={styles.offersLabel}>Why Us</span>
+                            <h2 className={styles.offersTitle}>What YouTube Reviews Won&apos;t Tell You</h2>
                             <p className={styles.offersSubtitle}>
-                                From choosing the right car to getting the best price, we handle everything for you.
+                                Dealerships push inventory. Influencers get paid. We give you honest, zero-commission advice.
                             </p>
                         </div>
 
@@ -248,11 +248,10 @@ export default function Home() {
             <section className={styles.whyUs}>
                 <div className={styles.sectionContainer}>
                     <div className={styles.sectionHeader}>
-                        <span className={styles.sectionTag}>Experts</span>
-                        <h2 className={styles.sectionTitle}>Meet The Experts</h2>
+                        <span className={styles.sectionTag}>Our Team</span>
+                        <h2 className={styles.sectionTitle}>Advice From Engineers, Not Salespeople</h2>
                         <p className={styles.sectionSubtitle}>
-                            Our certified automotive engineers and luxury market specialists have tested over 500+ vehicles.
-                            Get unbiased, data-backed advice tailored to your specific needs and budget.
+                            500+ cars tested. Zero commission. Our experts have spent years inside factories and dealerships—now they work for you.
                         </p>
                     </div>
 
