@@ -9,7 +9,7 @@ import ExitIntentModal from '@/components/ExitIntentModal';
 
 export default function CartPage() {
     const router = useRouter();
-    const { selectedPlan, couponCode, discount, applyCoupon, clearCoupon, getTotal, removeFromCart } = useCart();
+    const { cartItems, couponCode, discount, applyCoupon, clearCoupon, getSubtotal, getTotal, removeFromCart } = useCart();
     const [couponInput, setCouponInput] = useState('');
     const [couponError, setCouponError] = useState('');
     const [couponSuccess, setCouponSuccess] = useState(false);
@@ -68,8 +68,8 @@ export default function CartPage() {
         setCouponSuccess(false);
     };
 
-    // Redirect to plans if no plan selected
-    if (!selectedPlan) {
+    // Redirect to plans if cart is empty
+    if (cartItems.length === 0) {
         return (
             <div className={styles.emptyCart}>
                 <div className={styles.emptyIcon}>🛒</div>
@@ -93,6 +93,7 @@ export default function CartPage() {
                         </svg>
                     </button>
                     <h1 className={styles.title}>Your Cart</h1>
+                    <span className={styles.cartCount}>{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}</span>
                 </div>
 
                 {/* Savings Banner */}
@@ -103,26 +104,28 @@ export default function CartPage() {
                     </div>
                 )}
 
-                {/* Plan Card */}
-                <div className={styles.planCard}>
-                    <div className={styles.planHeader}>
-                        <div className={styles.planIcon}>
-                            {selectedPlan.icon || '📋'}
+                {/* Plan Cards - Multiple */}
+                {cartItems.map((plan) => (
+                    <div key={plan.id} className={styles.planCard}>
+                        <div className={styles.planHeader}>
+                            <div className={styles.planIcon}>
+                                {plan.icon || '📋'}
+                            </div>
+                            <div className={styles.planInfo}>
+                                <h3 className={styles.planTitle}>{plan.title}</h3>
+                                <p className={styles.planDetail}>{plan.detail}</p>
+                            </div>
+                            <div className={styles.planPrice}>
+                                <span className={styles.currency}>₹</span>
+                                {plan.price}
+                            </div>
                         </div>
-                        <div className={styles.planInfo}>
-                            <h3 className={styles.planTitle}>{selectedPlan.title}</h3>
-                            <p className={styles.planDetail}>{selectedPlan.detail}</p>
-                        </div>
-                        <div className={styles.planPrice}>
-                            <span className={styles.currency}>₹</span>
-                            {selectedPlan.price}
-                        </div>
+                        <p className={styles.planDesc}>{plan.description}</p>
+                        <button onClick={() => removeFromCart(plan.id)} className={styles.removeBtn}>
+                            Remove
+                        </button>
                     </div>
-                    <p className={styles.planDesc}>{selectedPlan.description}</p>
-                    <button onClick={removeFromCart} className={styles.removeBtn}>
-                        Remove
-                    </button>
-                </div>
+                ))}
 
                 {/* Add More Plans */}
                 <div className={styles.addMoreSection}>
@@ -188,8 +191,8 @@ export default function CartPage() {
                     </h3>
 
                     <div className={styles.billRow}>
-                        <span>Item Total</span>
-                        <span>₹{selectedPlan.price}</span>
+                        <span>Item Total ({cartItems.length} {cartItems.length === 1 ? 'plan' : 'plans'})</span>
+                        <span>₹{getSubtotal()}</span>
                     </div>
 
                     {discount > 0 && (

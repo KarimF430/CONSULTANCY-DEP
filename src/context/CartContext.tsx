@@ -20,14 +20,16 @@ interface UserInfo {
 }
 
 interface CartContextType {
-    selectedPlan: Plan | null;
+    cartItems: Plan[];
     couponCode: string;
     discount: number;
     userInfo: UserInfo | null;
     addToCart: (plan: Plan) => void;
-    removeFromCart: () => void;
+    removeFromCart: (planId: number) => void;
+    clearCart: () => void;
     applyCoupon: (code: string) => boolean;
     clearCoupon: () => void;
+    getSubtotal: () => number;
     getTotal: () => number;
     setUserInfo: (info: UserInfo) => void;
 }
@@ -43,17 +45,25 @@ const COUPONS: { [key: string]: number } = {
 };
 
 export function CartProvider({ children }: { children: ReactNode }) {
-    const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+    const [cartItems, setCartItems] = useState<Plan[]>([]);
     const [couponCode, setCouponCode] = useState('');
     const [discount, setDiscount] = useState(0);
     const [userInfo, setUserInfoState] = useState<UserInfo | null>(null);
 
     const addToCart = (plan: Plan) => {
-        setSelectedPlan(plan);
+        // Check if plan already exists in cart
+        const exists = cartItems.some(item => item.id === plan.id);
+        if (!exists) {
+            setCartItems(prev => [...prev, plan]);
+        }
     };
 
-    const removeFromCart = () => {
-        setSelectedPlan(null);
+    const removeFromCart = (planId: number) => {
+        setCartItems(prev => prev.filter(item => item.id !== planId));
+    };
+
+    const clearCart = () => {
+        setCartItems([]);
         setCouponCode('');
         setDiscount(0);
     };
@@ -73,9 +83,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setDiscount(0);
     };
 
+    const getSubtotal = () => {
+        return cartItems.reduce((sum, item) => sum + item.price, 0);
+    };
+
     const getTotal = () => {
-        if (!selectedPlan) return 0;
-        return Math.max(0, selectedPlan.price - discount);
+        const subtotal = getSubtotal();
+        return Math.max(0, subtotal - discount);
     };
 
     const setUserInfo = (info: UserInfo) => {
@@ -84,14 +98,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     return (
         <CartContext.Provider value={{
-            selectedPlan,
+            cartItems,
             couponCode,
             discount,
             userInfo,
             addToCart,
             removeFromCart,
+            clearCart,
             applyCoupon,
             clearCoupon,
+            getSubtotal,
             getTotal,
             setUserInfo,
         }}>

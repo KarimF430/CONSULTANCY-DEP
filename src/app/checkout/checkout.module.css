@@ -1,9 +1,13 @@
+/* ============================================
+   CHECKOUT PAGE - MATCHING HOMEPAGE THEME
+   ============================================ */
+
 .container {
     max-width: 520px;
     margin: 0 auto;
     padding: 20px 16px 160px;
     min-height: 100vh;
-    background: #ffffff;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
 }
 
 /* Header */
@@ -12,37 +16,41 @@
     align-items: center;
     gap: 14px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
     margin-bottom: 24px;
 }
 
 .backBtn {
     width: 40px;
     height: 40px;
-    border-radius: 10px;
-    border: none;
-    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    color: #0f172a;
 }
 
 .backBtn:hover {
     background: #f1f5f9;
+    border-color: #cbd5e1;
 }
 
 .title {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     color: #0f172a;
+    letter-spacing: -0.01em;
 }
 
 /* Order Summary */
 .orderSummary {
-    background: #f8fafc;
-    border-radius: 12px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 14px;
     padding: 16px 18px;
     margin-bottom: 24px;
 }
@@ -56,8 +64,8 @@
 
 .summaryLabel {
     font-size: 12px;
-    font-weight: 600;
-    color: #64748b;
+    font-weight: 700;
+    color: #1e40af;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -66,7 +74,11 @@
     font-size: 13px;
     color: #2563eb;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+}
+
+.editLink:hover {
+    text-decoration: underline;
 }
 
 .summaryContent {
@@ -82,12 +94,32 @@
 }
 
 .planAmount {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #0f172a;
+}
+
+.discountLabel {
+    font-size: 14px;
+    color: #059669;
+}
+
+.discountValue {
+    font-size: 14px;
+    font-weight: 600;
+    color: #059669;
+}
+
+.summaryTotal {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 6px;
+    padding-top: 12px;
+    margin-top: 8px;
+    border-top: 1px dashed #bfdbfe;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
 }
 
 .originalPrice {
@@ -98,10 +130,12 @@
 
 /* Section */
 .section {
-    background: #fafbfc;
-    border-radius: 14px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
     padding: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .slotSection {
@@ -109,8 +143,8 @@
 }
 
 .sectionTitle {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     color: #0f172a;
     display: flex;
     align-items: center;
@@ -119,7 +153,7 @@
 }
 
 .sectionTitle svg {
-    color: #64748b;
+    color: #2563eb;
 }
 
 /* Form */
@@ -134,7 +168,7 @@
 .label {
     display: block;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: #475569;
     margin-bottom: 8px;
 }
@@ -146,12 +180,14 @@
     border-radius: 10px;
     font-size: 15px;
     transition: all 0.2s;
-    background: white;
+    background: #fafbfc;
 }
 
 .input:focus {
     outline: none;
-    border-color: #0f172a;
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .inputError {
@@ -187,11 +223,12 @@
 
 .paymentBtn:hover {
     border-color: #cbd5e1;
+    background: #fafbfc;
 }
 
 .paymentActive {
-    border-color: #0f172a;
-    background: #fafbfc;
+    border-color: #2563eb;
+    background: #eff6ff;
 }
 
 .paymentIcon {
@@ -206,8 +243,8 @@
 
 .paymentLabel {
     display: block;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     color: #0f172a;
     margin-bottom: 2px;
 }
@@ -229,13 +266,13 @@
 }
 
 .paymentActive .paymentRadio {
-    border-color: #0f172a;
+    border-color: #2563eb;
 }
 
 .radioInner {
     width: 10px;
     height: 10px;
-    background: #0f172a;
+    background: #2563eb;
     border-radius: 50%;
 }
 
@@ -247,7 +284,7 @@
     right: 0;
     background: white;
     padding: 16px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid #e2e8f0;
     z-index: 100;
 }
 
@@ -258,7 +295,7 @@
 
 .selectedSlotInfo {
     font-size: 13px;
-    color: #16a34a;
+    color: #059669;
     font-weight: 500;
 }
 
@@ -270,19 +307,21 @@
     width: 100%;
     max-width: 488px;
     margin: 0 auto;
-    background: #16a34a;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
     padding: 16px 24px;
     border: none;
     border-radius: 12px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
 }
 
 .payBtn:hover:not(:disabled) {
-    background: #15803d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
 }
 
 .payBtn:disabled {
@@ -320,7 +359,7 @@
 }
 
 .emptyState h2 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 8px;
@@ -334,13 +373,14 @@
 
 .browseBtn {
     display: inline-block;
-    background: #0f172a;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     color: white;
     padding: 14px 28px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
 /* Mobile */

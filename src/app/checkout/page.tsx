@@ -10,7 +10,7 @@ import SlotPicker from '@/components/SlotPicker';
 
 export default function CheckoutPage() {
     const router = useRouter();
-    const { selectedPlan, discount, getTotal, userInfo, setUserInfo } = useCart();
+    const { cartItems, discount, getSubtotal, getTotal, userInfo, setUserInfo } = useCart();
 
     // Form State - Auto-fill from userInfo if available
     const [name, setName] = useState('');
@@ -109,12 +109,12 @@ export default function CheckoutPage() {
         }
     };
 
-    // Redirect to cart if no plan selected
-    if (!selectedPlan) {
+    // Redirect to cart if no items
+    if (cartItems.length === 0) {
         return (
             <div className={styles.emptyState}>
                 <div className={styles.emptyIcon}>🛒</div>
-                <h2>No plan selected</h2>
+                <h2>No items in cart</h2>
                 <p>Please select a plan first to proceed with checkout.</p>
                 <Link href="/plans" className={styles.browseBtn}>
                     Browse Plans
@@ -142,12 +142,21 @@ export default function CheckoutPage() {
                         <span className={styles.summaryLabel}>Order Summary</span>
                         <Link href="/cart" className={styles.editLink}>Edit</Link>
                     </div>
-                    <div className={styles.summaryContent}>
-                        <span className={styles.planName}>{selectedPlan.title}</span>
-                        <span className={styles.planAmount}>
-                            {discount > 0 && <del className={styles.originalPrice}>₹{selectedPlan.price}</del>}
-                            ₹{getTotal()}
-                        </span>
+                    {cartItems.map((plan) => (
+                        <div key={plan.id} className={styles.summaryContent}>
+                            <span className={styles.planName}>{plan.title}</span>
+                            <span className={styles.planAmount}>₹{plan.price}</span>
+                        </div>
+                    ))}
+                    {discount > 0 && (
+                        <div className={styles.summaryContent}>
+                            <span className={styles.discountLabel}>Discount</span>
+                            <span className={styles.discountValue}>-₹{discount}</span>
+                        </div>
+                    )}
+                    <div className={styles.summaryTotal}>
+                        <span>Total</span>
+                        <span>₹{getTotal()}</span>
                     </div>
                 </div>
 
