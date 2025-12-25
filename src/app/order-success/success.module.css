@@ -4,68 +4,49 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+    background: #ffffff;
 }
 
 .card {
     background: white;
-    border-radius: 24px;
+    border-radius: 16px;
     padding: 48px 32px;
-    max-width: 480px;
+    max-width: 420px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
-/* Success Icon */
 .successIcon {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto 24px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: #f0fdf4;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    animation: scaleIn 0.5s ease-out;
-}
-
-@keyframes scaleIn {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    color: #16a34a;
 }
 
 .title {
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 24px;
+    font-weight: 700;
     color: #0f172a;
     margin-bottom: 8px;
 }
 
 .subtitle {
-    font-size: 16px;
+    font-size: 14px;
     color: #64748b;
     margin-bottom: 32px;
 }
 
-/* Order Details */
 .orderDetails {
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 20px;
+    background: #fafbfc;
+    border-radius: 12px;
+    padding: 18px;
     margin-bottom: 28px;
+    text-align: left;
 }
 
 .orderRow {
@@ -81,43 +62,42 @@
 }
 
 .orderLabel {
-    font-size: 14px;
+    font-size: 13px;
     color: #64748b;
 }
 
 .orderId {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     color: #0f172a;
     font-family: monospace;
     background: #e2e8f0;
-    padding: 4px 10px;
-    border-radius: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
 }
 
 .orderValue {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #0f172a;
 }
 
 .orderAmount {
-    font-size: 18px;
-    font-weight: 800;
-    color: #10b981;
+    font-size: 16px;
+    font-weight: 700;
+    color: #16a34a;
 }
 
-/* Next Steps */
 .nextSteps {
     text-align: left;
     margin-bottom: 32px;
 }
 
 .stepsTitle {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     color: #0f172a;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     text-align: center;
 }
 
@@ -131,57 +111,52 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding: 12px 0;
-    font-size: 14px;
+    padding: 10px 0;
+    font-size: 13px;
     color: #475569;
 }
 
 .stepNumber {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    background: #10b981;
+    background: #0f172a;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 600;
     flex-shrink: 0;
 }
 
-/* Actions */
 .actions {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .homeBtn {
     display: block;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: #0f172a;
     color: white;
-    padding: 16px 24px;
-    border-radius: 14px;
-    font-size: 16px;
-    font-weight: 700;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
     text-decoration: none;
-    transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transition: background 0.2s;
 }
 
 .homeBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+    background: #1e293b;
 }
 
 .plansBtn {
     display: block;
-    background: none;
-    border: none;
     color: #64748b;
-    padding: 12px;
-    font-size: 14px;
+    padding: 10px;
+    font-size: 13px;
     font-weight: 500;
     text-decoration: none;
 }
@@ -190,24 +165,22 @@
     color: #0f172a;
 }
 
-/* Mobile */
 @media (max-width: 480px) {
     .card {
         padding: 32px 20px;
-        border-radius: 20px;
     }
 
     .title {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .successIcon {
-        width: 80px;
-        height: 80px;
+        width: 64px;
+        height: 64px;
     }
 
     .successIcon svg {
-        width: 48px;
-        height: 48px;
+        width: 32px;
+        height: 32px;
     }
 }

@@ -1,50 +1,49 @@
 .container {
-    max-width: 600px;
+    max-width: 520px;
     margin: 0 auto;
-    padding: 24px 16px 160px;
+    padding: 20px 16px 160px;
     min-height: 100vh;
-    background: #f8fafc;
+    background: #ffffff;
 }
 
 /* Header */
 .header {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f1f5f9;
     margin-bottom: 24px;
 }
 
 .backBtn {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    border: 1px solid #e2e8f0;
-    background: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: #f8fafc;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: background 0.2s;
 }
 
 .backBtn:hover {
     background: #f1f5f9;
-    transform: translateY(-1px);
 }
 
 .title {
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 22px;
+    font-weight: 700;
     color: #0f172a;
 }
 
 /* Order Summary */
 .orderSummary {
-    background: linear-gradient(135deg, #eff6ff, #dbeafe);
-    border: 1px solid #bfdbfe;
-    border-radius: 20px;
-    padding: 18px 22px;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px 18px;
     margin-bottom: 24px;
 }
 
@@ -52,13 +51,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .summaryLabel {
-    font-size: 13px;
-    font-weight: 700;
-    color: #2563eb;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -67,7 +66,7 @@
     font-size: 13px;
     color: #2563eb;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .summaryContent {
@@ -77,32 +76,31 @@
 }
 
 .planName {
-    font-size: 17px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
     color: #0f172a;
 }
 
 .planAmount {
-    font-size: 20px;
-    font-weight: 800;
+    font-size: 18px;
+    font-weight: 700;
     color: #0f172a;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .originalPrice {
-    font-size: 14px;
+    font-size: 13px;
     color: #94a3b8;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 /* Section */
 .section {
-    background: white;
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    background: #fafbfc;
+    border-radius: 14px;
+    padding: 20px;
     margin-bottom: 20px;
 }
 
@@ -111,22 +109,22 @@
 }
 
 .sectionTitle {
-    font-size: 17px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
     color: #0f172a;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .sectionTitle svg {
-    color: #2563eb;
+    color: #64748b;
 }
 
 /* Form */
 .formGroup {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .formGroup:last-child {
@@ -136,26 +134,24 @@
 .label {
     display: block;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     color: #475569;
     margin-bottom: 8px;
 }
 
 .input {
     width: 100%;
-    padding: 15px 18px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
     font-size: 15px;
     transition: all 0.2s;
-    background: #fafbfc;
+    background: white;
 }
 
 .input:focus {
     outline: none;
-    border-color: #2563eb;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: #0f172a;
 }
 
 .inputError {
@@ -167,23 +163,22 @@
     color: #ef4444;
     font-size: 12px;
     margin-top: 6px;
-    font-weight: 500;
 }
 
 /* Payment Methods */
 .paymentMethods {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .paymentBtn {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 18px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 16px;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
     background: white;
     cursor: pointer;
     text-align: left;
@@ -192,17 +187,16 @@
 
 .paymentBtn:hover {
     border-color: #cbd5e1;
-    background: #fafbfc;
 }
 
 .paymentActive {
-    border-color: #2563eb;
-    background: #eff6ff;
+    border-color: #0f172a;
+    background: #fafbfc;
 }
 
 .paymentIcon {
-    font-size: 28px;
-    width: 48px;
+    font-size: 24px;
+    width: 40px;
     text-align: center;
 }
 
@@ -212,10 +206,10 @@
 
 .paymentLabel {
     display: block;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     color: #0f172a;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
 }
 
 .paymentSub {
@@ -224,8 +218,8 @@
 }
 
 .paymentRadio {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border: 2px solid #cbd5e1;
     border-radius: 50%;
     display: flex;
@@ -235,13 +229,13 @@
 }
 
 .paymentActive .paymentRadio {
-    border-color: #2563eb;
+    border-color: #0f172a;
 }
 
 .radioInner {
-    width: 12px;
-    height: 12px;
-    background: #2563eb;
+    width: 10px;
+    height: 10px;
+    background: #0f172a;
     border-radius: 50%;
 }
 
@@ -253,7 +247,7 @@
     right: 0;
     background: white;
     padding: 16px;
-    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #f1f5f9;
     z-index: 100;
 }
 
@@ -264,44 +258,42 @@
 
 .selectedSlotInfo {
     font-size: 13px;
-    color: #10b981;
-    font-weight: 600;
+    color: #16a34a;
+    font-weight: 500;
 }
 
 .payBtn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    max-width: 568px;
+    max-width: 488px;
     margin: 0 auto;
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: #16a34a;
     color: white;
-    padding: 18px 28px;
+    padding: 16px 24px;
     border: none;
-    border-radius: 16px;
-    font-size: 17px;
-    font-weight: 700;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+    transition: background 0.2s;
 }
 
 .payBtn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
+    background: #15803d;
 }
 
 .payBtn:disabled {
-    opacity: 0.7;
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
 .spinner {
-    width: 20px;
-    height: 20px;
-    border: 2.5px solid white;
+    width: 18px;
+    height: 18px;
+    border: 2px solid white;
     border-top-color: transparent;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
@@ -315,55 +307,45 @@
 
 /* Empty State */
 .emptyState {
-    max-width: 400px;
-    margin: 100px auto;
+    max-width: 360px;
+    margin: 80px auto;
     text-align: center;
-    padding: 48px 28px;
+    padding: 40px 24px;
 }
 
 .emptyIcon {
-    font-size: 72px;
-    margin-bottom: 28px;
+    font-size: 56px;
+    margin-bottom: 20px;
+    opacity: 0.6;
 }
 
 .emptyState h2 {
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 20px;
+    font-weight: 700;
     color: #0f172a;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
 }
 
 .emptyState p {
-    font-size: 16px;
+    font-size: 14px;
     color: #64748b;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .browseBtn {
     display: inline-block;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: #0f172a;
     color: white;
-    padding: 16px 36px;
-    border-radius: 14px;
-    font-size: 16px;
-    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
 
 /* Mobile */
 @media (max-width: 480px) {
     .container {
-        padding: 16px 12px 160px;
-    }
-
-    .section {
-        padding: 20px 16px;
-        border-radius: 16px;
-    }
-
-    .paymentIcon {
-        font-size: 24px;
-        width: 40px;
+        padding: 16px 14px 160px;
     }
 }

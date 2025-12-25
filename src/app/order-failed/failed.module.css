@@ -4,76 +4,54 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    background: #ffffff;
 }
 
 .card {
     background: white;
-    border-radius: 24px;
+    border-radius: 16px;
     padding: 48px 32px;
-    max-width: 480px;
+    max-width: 420px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
-/* Failed Icon */
 .failedIcon {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto 24px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ef4444, #dc2626);
+    background: #fef2f2;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    animation: shake 0.5s ease-out;
-}
-
-@keyframes shake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    20%,
-    60% {
-        transform: translateX(-5px);
-    }
-
-    40%,
-    80% {
-        transform: translateX(5px);
-    }
+    color: #ef4444;
 }
 
 .title {
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 24px;
+    font-weight: 700;
     color: #0f172a;
     margin-bottom: 8px;
 }
 
 .subtitle {
-    font-size: 16px;
+    font-size: 14px;
     color: #64748b;
     margin-bottom: 28px;
 }
 
-/* Reason Box */
 .reasonBox {
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 20px;
+    background: #fafbfc;
+    border-radius: 12px;
+    padding: 18px;
     margin-bottom: 28px;
     text-align: left;
 }
 
 .reasonTitle {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     color: #0f172a;
     margin-bottom: 12px;
 }
@@ -86,8 +64,8 @@
 
 .reasonList li {
     position: relative;
-    padding-left: 20px;
-    font-size: 14px;
+    padding-left: 16px;
+    font-size: 13px;
     color: #64748b;
     margin-bottom: 8px;
 }
@@ -96,15 +74,13 @@
     content: '•';
     position: absolute;
     left: 0;
-    color: #ef4444;
-    font-size: 18px;
+    color: #94a3b8;
 }
 
-/* Actions */
 .actions {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .retryBtn {
@@ -112,30 +88,28 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: #16a34a;
     color: white;
-    padding: 16px 24px;
+    padding: 14px 24px;
     border: none;
-    border-radius: 14px;
-    font-size: 16px;
-    font-weight: 700;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    transition: background 0.2s;
 }
 
 .retryBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+    background: #15803d;
 }
 
 .cartBtn {
     display: block;
     background: #f1f5f9;
     color: #0f172a;
-    padding: 14px 24px;
-    border-radius: 12px;
-    font-size: 15px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
     font-weight: 600;
     text-decoration: none;
     transition: background 0.2s;
@@ -148,34 +122,32 @@
 .supportLink {
     display: block;
     color: #2563eb;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     text-decoration: none;
-    padding: 12px;
+    padding: 10px;
 }
 
 .supportLink:hover {
     text-decoration: underline;
 }
 
-/* Mobile */
 @media (max-width: 480px) {
     .card {
         padding: 32px 20px;
-        border-radius: 20px;
     }
 
     .title {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .failedIcon {
-        width: 80px;
-        height: 80px;
+        width: 64px;
+        height: 64px;
     }
 
     .failedIcon svg {
-        width: 48px;
-        height: 48px;
+        width: 32px;
+        height: 32px;
     }
 }
