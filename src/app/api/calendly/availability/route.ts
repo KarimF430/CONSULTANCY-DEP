@@ -55,9 +55,22 @@ export async function GET(request: NextRequest) {
         const eventType = eventsData.collection[0];
         const eventTypeUri = eventType.uri;
 
+        // Use current time for start (must be in the future)
+        const now = new Date();
+        const startTime = new Date(startDate);
+        // If start date is today, use current time + 1 hour; otherwise use 6 AM
+        if (startTime.toDateString() === now.toDateString()) {
+            startTime.setHours(now.getHours() + 1, 0, 0, 0);
+        } else {
+            startTime.setHours(6, 0, 0, 0);
+        }
+
+        const endTime = new Date(endDate);
+        endTime.setHours(23, 59, 59, 0);
+
         // Fetch available times
         const availabilityResponse = await fetch(
-            `${CALENDLY_API_BASE}/event_type_available_times?event_type=${encodeURIComponent(eventTypeUri)}&start_time=${startDate}T00:00:00Z&end_time=${endDate}T23:59:59Z`,
+            `${CALENDLY_API_BASE}/event_type_available_times?event_type=${encodeURIComponent(eventTypeUri)}&start_time=${startTime.toISOString()}&end_time=${endTime.toISOString()}`,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`,
