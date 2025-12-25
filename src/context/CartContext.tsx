@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface Plan {
     id: number;
@@ -36,6 +36,11 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+// Storage keys
+const CART_STORAGE_KEY = 'car_consultancy_cart';
+const USER_STORAGE_KEY = 'car_consultancy_user';
+const COUPON_STORAGE_KEY = 'car_consultancy_coupon';
+
 // Available coupons
 const COUPONS: { [key: string]: number } = {
     'SAVE10': 10,
@@ -49,9 +54,71 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const [couponCode, setCouponCode] = useState('');
     const [discount, setDiscount] = useState(0);
     const [userInfo, setUserInfoState] = useState<UserInfo | null>(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    // Load data from localStorage on mount
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            try {
+                // Load cart items
+                const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+                if (savedCart) {
+                    const parsed = JSON.parse(savedCart);
+                    // Remove icon field (can't serialize ReactNode)
+                    setCartItems(parsed.map((item: Plan) => ({ ...item, icon: undefined })));
+                }
+
+                // Load user info
+                const savedUser = localStorage.getItem(USER_STORAGE_KEY);
+                if (savedUser) {
+                    setUserInfoState(JSON.parse(savedUser));
+                }
+
+                // Load coupon
+                const savedCoupon = localStorage.getItem(COUPON_STORAGE_KEY);
+                if (savedCoupon) {
+                    const { code, discountValue } = JSON.parse(savedCoupon);
+                    setCouponCode(code);
+                    setDiscount(discountValue);
+                }
+            } catch (error) {
+                console.error('Error loading cart from localStorage:', error);
+            }
+            setIsLoaded(true);
+        }
+    }, []);
+
+    // Save cart to localStorage whenever it changes
+    useEffect(() => {
+        if (isLoaded && typeof window !== 'undefined') {
+            // Save without icon (can't serialize ReactNode)
+            const cartToSave = cartItems.map(({ icon, ...rest }) => rest);
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartToSave));
+        }
+    }, [cartItems, isLoaded]);
+
+    // Save user info to localStorage
+    useEffect(() => {
+        if (isLoaded && typeof window !== 'undefined' && userInfo) {
+            localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userInfo));
+        }
+    }, [userInfo, isLoaded]);
+
+    // Save coupon to localStorage
+    useEffect(() => {
+        if (isLoaded && typeof window !== 'undefined') {
+            if (couponCode) {
+                localStorage.setItem(COUPON_STORAGE_KEY, JSON.stringify({
+                    code: couponCode,
+                    discountValue: discount
+                }));
+            } else {
+                localStorage.removeItem(COUPON_STORAGE_KEY);
+            }
+        }
+    }, [couponCode, discount, isLoaded]);
 
     const addToCart = (plan: Plan) => {
-        // Check if plan already exists in cart
         const exists = cartItems.some(item => item.id === plan.id);
         if (!exists) {
             setCartItems(prev => [...prev, plan]);
@@ -66,6 +133,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCartItems([]);
         setCouponCode('');
         setDiscount(0);
+        // Also clear localStorage
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(CART_STORAGE_KEY);
+            localStorage.removeItem(COUPON_STORAGE_KEY);
+        }
     };
 
     const applyCoupon = (code: string): boolean => {
