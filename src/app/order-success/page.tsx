@@ -21,8 +21,8 @@ export default function OrderSuccessPage() {
     const hasCleared = useRef(false);
     const searchParams = useSearchParams();
 
-    // Calendly URL - replace with your actual Calendly link
-    const CALENDLY_URL = 'https://calendly.com/carconsultancy/consultation';
+    // Calendly URL
+    const CALENDLY_URL = 'https://calendly.com/karim0beldaar/30min';
 
     // Get booking info from session storage or URL params
     useEffect(() => {
