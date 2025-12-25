@@ -457,27 +457,26 @@
     }
 }
 
-/* Payment Accordion Styles */
+/* Payment Accordion Styles - Razorpay Style */
 .paymentAccordion {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .accordionItem {
-    border: 1.5px solid #e2e8f0;
-    border-radius: 12px;
-    overflow: hidden;
+    border-bottom: 1px dashed #e2e8f0;
     transition: all 0.2s;
 }
 
-.accordionItem:hover {
-    border-color: #cbd5e1;
+.accordionItem:last-child {
+    border-bottom: none;
 }
 
 .accordionActive {
-    border-color: #2563eb;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+    background: #f8fafc;
 }
 
 .accordionHeader {
@@ -485,8 +484,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
-    background: white;
+    padding: 18px 16px;
+    background: transparent;
     border: none;
     cursor: pointer;
     text-align: left;
@@ -499,30 +498,29 @@
 .accordionLeft {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     font-size: 15px;
     font-weight: 600;
-    color: #0f172a;
+    color: #1e293b;
 }
 
 .cardBrands {
     display: flex;
     gap: 6px;
-    margin-left: 8px;
+    margin-left: 6px;
 }
 
 .brandBadge {
-    font-size: 9px;
-    font-weight: 700;
-    padding: 3px 6px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
 }
 
 .chevron {
-    transition: transform 0.2s;
-    color: #64748b;
+    transition: transform 0.25s ease;
+    color: #94a3b8;
 }
 
 .chevronUp {
@@ -530,34 +528,38 @@
 }
 
 .accordionContent {
-    padding: 0 16px 16px;
-    background: #fafbfc;
-    border-top: 1px solid #e2e8f0;
+    padding: 4px 16px 20px;
+    background: white;
 }
 
 .subOption {
-    padding: 12px 0;
+    padding: 10px 0;
 }
 
 .cardInput {
     width: 100%;
-    padding: 12px 14px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
     font-size: 14px;
     background: white;
-    transition: border-color 0.2s;
+    transition: all 0.2s;
 }
 
 .cardInput:focus {
     outline: none;
     border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.cardInput::placeholder {
+    color: #94a3b8;
 }
 
 .cardRow {
     display: flex;
     gap: 12px;
-    padding: 12px 0;
+    padding: 10px 0;
 }
 
 .cardRow .cardInput {
@@ -567,16 +569,21 @@
 .bankOption {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px;
-    margin-top: 12px;
+    gap: 14px;
+    padding: 14px 16px;
     background: white;
-    border: 1px dashed #e2e8f0;
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
-    color: #0f172a;
+    font-weight: 500;
+    color: #1e293b;
     transition: all 0.2s;
+    margin-bottom: 10px;
+}
+
+.bankOption:last-child {
+    margin-bottom: 0;
 }
 
 .bankOption:hover {
@@ -589,25 +596,25 @@
 }
 
 .bankIcon {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: white;
 }
 
 .bankRadio {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     accent-color: #2563eb;
+    cursor: pointer;
 }
 
 .upiInput {
     padding-top: 16px;
-    border-top: 1px dashed #e2e8f0;
-    margin-top: 8px;
+    margin-top: 10px;
 }
