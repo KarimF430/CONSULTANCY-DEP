@@ -124,6 +124,17 @@ export default function CartPage() {
                     </button>
                 </div>
 
+                {/* Add More Plans */}
+                <div className={styles.addMoreSection}>
+                    <span className={styles.addMoreText}>Missed something?</span>
+                    <Link href="/plans" className={styles.addMoreBtn}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        Add More Plans
+                    </Link>
+                </div>
+
                 {/* Coupon Section */}
                 <div className={styles.couponSection}>
                     <h3 className={styles.sectionTitle}>

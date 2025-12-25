@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './ConsultationModal.module.css';
+import { useCart } from '@/context/CartContext';
 
 interface ShortlistEntry {
     product: string;
@@ -37,6 +38,7 @@ const emptyShortlist = { product: '', whyThis: '', whyNot: '', comments: '' };
 
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
     const router = useRouter();
+    const { setUserInfo } = useCart();
     const [step, setStep] = useState(1);
     const [submissionId, setSubmissionId] = useState<string | null>(null);
 
@@ -83,6 +85,12 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 alert('Please fill in at least your Name and WhatsApp number.');
                 return;
             }
+            // Save contact info to cart for checkout auto-fill
+            setUserInfo({
+                name: formData.fullName,
+                phone: formData.whatsapp,
+                email: formData.email
+            });
         }
         setStep(prev => prev + 1);
     };
