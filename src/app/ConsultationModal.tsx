@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './ConsultationModal.module.css';
 
@@ -38,6 +38,7 @@ const emptyShortlist = { product: '', whyThis: '', whyNot: '', comments: '' };
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
     const router = useRouter();
     const [step, setStep] = useState(1);
+    const [submissionId, setSubmissionId] = useState<string | null>(null);
 
     const [formData, setFormData] = useState<FormData>({
         fullName: '', email: '', whatsapp: '', city: '', pinCode: '', state: '',
@@ -46,6 +47,33 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
         shortlist2: { ...emptyShortlist },
         shortlist3: { ...emptyShortlist }
     });
+
+    // 1. Initialize Session on Mount
+    useEffect(() => {
+        if (isOpen && !submissionId) {
+            fetch('/api/consultation/init', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.submissionId) setSubmissionId(data.submissionId);
+                })
+                .catch(err => console.error('Failed to init session:', err));
+        }
+    }, [isOpen, submissionId]);
+
+    // 2. Autosave on Data Change (Debounced)
+    useEffect(() => {
+        if (!submissionId) return;
+
+        const timer = setTimeout(() => {
+            fetch('/api/consultation/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ submissionId, data: formData })
+            }).catch(err => console.error('Autosave failed:', err));
+        }, 1000); // 1-second debounce
+
+        return () => clearTimeout(timer);
+    }, [formData, submissionId]);
 
     if (!isOpen) return null;
 
@@ -63,7 +91,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Submitted Data:", formData);
+        // Final sync ensured by Autosave, strictly navigate
         router.push('/plans');
         onClose();
     };

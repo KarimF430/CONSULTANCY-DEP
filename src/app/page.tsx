@@ -7,6 +7,7 @@ import ReviewsSection from './ReviewsSection';
 import FAQSection from './FAQSection';
 import Footer from '@/components/Footer';
 import ConsultationModal from './ConsultationModal';
+import StickyBottomBar from '@/components/StickyBottomBar';
 
 export default function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,9 +15,7 @@ export default function Home() {
     const openModal = () => setIsModalOpen(true);
 
     return (
-        <div className={styles.page}>
-            <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
+        <main className={styles.page}>
             {/* HERO SECTION */}
             <section className={styles.hero}>
                 <div className={styles.heroContainer}>
@@ -250,6 +249,10 @@ export default function Home() {
                     <div className={styles.sectionHeader}>
                         <span className={styles.sectionTag}>Experts</span>
                         <h2 className={styles.sectionTitle}>Meet The Experts</h2>
+                        <p className={styles.sectionSubtitle}>
+                            Our certified automotive engineers and luxury market specialists have tested over 500+ vehicles.
+                            Get unbiased, data-backed advice tailored to your specific needs and budget.
+                        </p>
                     </div>
 
                     <div className={styles.expertGrid}>
@@ -312,6 +315,8 @@ export default function Home() {
             <FAQSection />
 
             <Footer />
-        </div>
+            <StickyBottomBar />
+            <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </main>
     );
 }
