@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './success.module.css';
 import { useCart } from '@/context/CartContext';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 interface BookingInfo {
@@ -15,7 +15,7 @@ interface BookingInfo {
     amount?: number;
 }
 
-export default function OrderSuccessPage() {
+function OrderSuccessContent() {
     const { clearCart } = useCart();
     const [booking, setBooking] = useState<BookingInfo | null>(null);
     const hasCleared = useRef(false);
@@ -40,10 +40,9 @@ export default function OrderSuccessPage() {
             hasCleared.current = true;
             clearCart();
         }
-    }, [searchParams]);
+    }, [searchParams, clearCart]);
 
     const handleBookSlot = () => {
-        // Open Calendly with prefilled user info
         let calendlyUrl = CALENDLY_URL;
         if (booking) {
             const params = new URLSearchParams();
@@ -92,7 +91,7 @@ export default function OrderSuccessPage() {
                     )}
                 </div>
 
-                {/* Calendly Booking Section - Important! */}
+                {/* Calendly Booking Section */}
                 <div className={styles.calendlySection}>
                     <div className={styles.calendlyHeader}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -158,5 +157,30 @@ export default function OrderSuccessPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+// Loading fallback
+function LoadingFallback() {
+    return (
+        <div className={styles.container}>
+            <div className={styles.card}>
+                <div className={styles.successIcon}>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                </div>
+                <h1 className={styles.title}>Loading...</h1>
+            </div>
+        </div>
+    );
+}
+
+export default function OrderSuccessPage() {
+    return (
+        <Suspense fallback={<LoadingFallback />}>
+            <OrderSuccessContent />
+        </Suspense>
     );
 }

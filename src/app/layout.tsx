@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 import { Navbar } from "@/components/ui/Navbar";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { CartProvider } from "@/context/CartContext";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -30,8 +31,17 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <WhatsAppButton />
+          <Toaster
+            position="top-center"
+            richColors
+            closeButton
+            toastOptions={{
+              duration: 4000,
+            }}
+          />
         </CartProvider>
       </body>
     </html>
   );
 }
+

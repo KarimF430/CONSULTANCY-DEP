@@ -7,6 +7,7 @@ import styles from './checkout.module.css';
 import { useCart } from '@/context/CartContext';
 import ExitIntentModal from '@/components/ExitIntentModal';
 import SlotPicker from '@/components/SlotPicker';
+import { toast } from 'sonner';
 
 export default function CheckoutPage() {
     const router = useRouter();
@@ -170,9 +171,20 @@ export default function CheckoutPage() {
             document.body.appendChild(form);
             form.submit();
 
-        } catch (error) {
+        } catch (error: unknown) {
             console.error('Payment error:', error);
-            router.push('/order-failed');
+            const errorMessage = error instanceof Error ? error.message : 'Payment failed';
+
+            // Show toast notification
+            if (errorMessage.includes('Too many requests')) {
+                toast.error('Too many attempts', {
+                    description: 'Please wait a minute before trying again.',
+                });
+            } else {
+                toast.error('Payment Error', {
+                    description: errorMessage || 'Something went wrong. Please try again.',
+                });
+            }
             setIsProcessing(false);
         }
     };

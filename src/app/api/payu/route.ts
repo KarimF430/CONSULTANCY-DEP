@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
+import { payuRateLimiter, checkRateLimit } from '@/lib/rateLimiter';
 
 // PayU Official Test/Sandbox Credentials
 const PAYU_MERCHANT_KEY = process.env.PAYU_MERCHANT_KEY || 'gtKFFx';
@@ -16,12 +17,49 @@ function generateHash(params: Record<string, string>): string {
 
 export async function POST(request: NextRequest) {
     try {
+        // Rate limiting - use IP or forwarded header
+        const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ||
+            request.headers.get('x-real-ip') ||
+            'anonymous';
+
+        const rateLimitResult = await checkRateLimit(payuRateLimiter, ip);
+        if (!rateLimitResult.allowed) {
+            return NextResponse.json(
+                { error: 'Too many requests. Please try again later.', retryAfter: rateLimitResult.retryAfter },
+                { status: 429 }
+            );
+        }
+
         const body = await request.json();
         const { name, email, phone, amount, planName, orderId } = body;
 
         if (!name || !email || !phone || !amount) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
+                { status: 400 }
+            );
+        }
+
+        // Validate email format
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            return NextResponse.json(
+                { error: 'Invalid email format' },
+                { status: 400 }
+            );
+        }
+
+        // Validate phone format (Indian)
+        if (!/^[6-9]\d{9}$/.test(phone.replace(/\s/g, ''))) {
+            return NextResponse.json(
+                { error: 'Invalid phone number' },
+                { status: 400 }
+            );
+        }
+
+        // Validate amount
+        if (typeof amount !== 'number' || amount <= 0) {
+            return NextResponse.json(
+                { error: 'Invalid amount' },
                 { status: 400 }
             );
         }

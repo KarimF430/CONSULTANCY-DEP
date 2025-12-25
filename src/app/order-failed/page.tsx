@@ -1,13 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import styles from './failed.module.css';
 
 export default function OrderFailedPage() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const reason = searchParams.get('reason') || 'Something went wrong with your payment';
 
     const handleRetry = () => {
         router.push('/checkout');
