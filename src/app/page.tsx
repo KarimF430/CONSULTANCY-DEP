@@ -8,6 +8,7 @@ import FAQSection from './FAQSection';
 import Footer from '@/components/Footer';
 import ConsultationModal from './ConsultationModal';
 import StickyBottomBar from '@/components/StickyBottomBar';
+import FeedbackForm from '@/components/FeedbackForm';
 
 export default function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -313,6 +314,9 @@ export default function Home() {
 
             {/* FAQ */}
             <FAQSection />
+
+            {/* Feedback Form */}
+            <FeedbackForm />
 
             <Footer />
             <StickyBottomBar />

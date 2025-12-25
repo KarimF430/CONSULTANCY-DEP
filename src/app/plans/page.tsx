@@ -8,6 +8,7 @@ import ConsultationModal from '../ConsultationModal';
 import Footer from '@/components/Footer';
 import ExitIntentModal from '@/components/ExitIntentModal';
 import { useCart } from '@/context/CartContext';
+import FeedbackForm from '@/components/FeedbackForm';
 
 const plans = [
     {
@@ -344,6 +345,7 @@ export default function PlansPage() {
                     isExpertView={exitContext === 'expert' || exitContext === 'switch'}
                 />
             </div>
+            <FeedbackForm />
             <Footer />
         </>
     );
