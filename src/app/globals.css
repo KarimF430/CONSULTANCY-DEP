@@ -1,0 +1,96 @@
+:root {
+    /* Brand Colors - Ditto Inspired (Light Theme) */
+    /* Primary Blue (Action/Links) */
+    --primary: 209 100% 52%;
+    /* #2474E5 - Bright Blue */
+    --primary-foreground: 0 0% 100%;
+
+    /* Background - Pure White */
+    --background: 0 0% 100%;
+    --foreground: 220 15% 15%;
+    /* Near Black for text */
+
+    /* Muted backgrounds */
+    --muted: 220 14% 96%;
+    /* Very light gray */
+    --muted-foreground: 220 10% 40%;
+
+    /* Cards */
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    /* Borders */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+
+    /* System */
+    --radius: 12px;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Container */
+    --container-width: 1140px;
+    --container-padding: 1.5rem;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: hsl(var(--foreground));
+}
+
+h1 {
+    font-size: 2.75rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Layout */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}

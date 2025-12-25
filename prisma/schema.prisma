@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("USER") // USER, EXPERT, ADMIN
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  expertProfile ExpertProfile?
+  bookings      Booking[]
+}
+
+model ExpertProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio         String
+  specialties String   // Stored as comma-separated string or JSON depending on needs
+  hourlyRate  Float
+  verified    Boolean  @default(false)
+  rating      Float    @default(0.0)
+  reviewCount Int      @default(0)
+  
+  expertBookings Booking[]
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expertId  String
+  expert    ExpertProfile @relation(fields: [expertId], references: [id])
+  date      DateTime
+  status    String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED, COMPLETED
+  createdAt DateTime @default(now())
+}
+
+model Car {
+  id        String   @id @default(cuid())
+  make      String
+  model     String
+  variant   String
+  price     Float
+  image     String?
+  specs     String   // JSON string of specs
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

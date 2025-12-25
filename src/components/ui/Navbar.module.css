@@ -1,0 +1,65 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    border-bottom: 1px solid #e5e7eb;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    height: 4rem;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.brandHighlight {
+    color: #2474E5;
+}
+
+.navLinks {
+    display: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .navLinks {
+        display: flex;
+    }
+}
+
+.link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #444;
+    transition: color 0.2s;
+}
+
+.link:hover {
+    color: #2474E5;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
