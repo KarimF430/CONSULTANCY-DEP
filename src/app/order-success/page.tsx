@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './success.module.css';
 import { useCart } from '@/context/CartContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 interface BookingInfo {
     name: string;
@@ -16,8 +16,9 @@ interface BookingInfo {
 }
 
 export default function OrderSuccessPage() {
-    const { cartItems, getTotal, clearCart } = useCart();
+    const { clearCart } = useCart();
     const [booking, setBooking] = useState<BookingInfo | null>(null);
+    const hasCleared = useRef(false);
 
     // Generate order ID
     const orderId = `CAR${Date.now().toString().slice(-8)}`;
@@ -28,9 +29,12 @@ export default function OrderSuccessPage() {
         if (storedBooking) {
             setBooking(JSON.parse(storedBooking));
         }
-        // Clear cart after successful order
-        clearCart();
-    }, [clearCart]);
+        // Clear cart after successful order (only once)
+        if (!hasCleared.current) {
+            hasCleared.current = true;
+            clearCart();
+        }
+    }, []);
 
     const handleConfirmSlot = () => {
         if (booking?.schedulingUrl) {
