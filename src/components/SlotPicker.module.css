@@ -1,12 +1,12 @@
 /* ============================================
-   SLOT PICKER - MATCHING HOMEPAGE THEME
+   SLOT PICKER - REFINED & MOBILE OPTIMIZED
    ============================================ */
 
 .container {
     background: white;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 20px;
+    padding: 24px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
@@ -14,13 +14,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    color: #1e40af;
+    color: #2563eb;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -29,18 +29,20 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: 13px;
     color: #64748b;
+    font-weight: 500;
 }
 
 /* Date Strip */
 .dateStrip {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     overflow-x: auto;
-    padding-bottom: 4px;
-    margin-bottom: 20px;
+    padding: 4px 0;
+    margin-bottom: 24px;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .dateStrip::-webkit-scrollbar {
@@ -49,10 +51,10 @@
 
 .dateCard {
     flex: 0 0 auto;
-    min-width: 68px;
-    padding: 12px 8px;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    min-width: 80px;
+    padding: 14px 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
     background: white;
     cursor: pointer;
     text-align: center;
@@ -61,35 +63,37 @@
 
 .dateCard:hover {
     border-color: #bfdbfe;
-    background: #eff6ff;
+    background: #f8fafc;
 }
 
 .dateCardActive {
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     border-color: #2563eb;
     color: white;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
 .dayLabel {
     display: block;
-    font-size: 9px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 700;
     letter-spacing: 0.5px;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     color: #64748b;
+    text-transform: uppercase;
 }
 
 .dateCardActive .dayLabel {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .dayNum {
     display: block;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
     color: #0f172a;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    line-height: 1;
 }
 
 .dateCardActive .dayNum {
@@ -98,54 +102,57 @@
 
 .slotsLabel {
     display: block;
-    font-size: 9px;
+    font-size: 10px;
     color: #94a3b8;
+    font-weight: 500;
 }
 
 .dateCardActive .slotsLabel {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.75);
 }
 
 /* Slots Container */
 .slotsContainer {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .slotGroupTitle {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
+    gap: 10px;
+    font-size: 15px;
     font-weight: 600;
-    color: #475569;
-    margin-bottom: 10px;
-    margin-top: 16px;
+    color: #0f172a;
+    margin-bottom: 14px;
+    margin-top: 24px;
 }
 
 .slotGroupTitle:first-child {
     margin-top: 0;
 }
 
-.slotGroupTitle svg {
-    color: #f59e0b;
+.slotGroupIcon {
+    font-size: 18px;
 }
 
 .slotsGrid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
 }
 
 .slotBtn {
-    padding: 10px 14px;
-    border: 1px solid #e2e8f0;
+    padding: 12px 18px;
+    border: 1.5px solid #e2e8f0;
     border-radius: 10px;
     background: white;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: #0f172a;
     cursor: pointer;
     transition: all 0.2s;
+    min-width: 90px;
+    text-align: center;
 }
 
 .slotBtn:hover:not(:disabled) {
@@ -157,11 +164,11 @@
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     border-color: #2563eb;
     color: white;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
 .slotBtnDisabled {
-    background: #f1f5f9;
+    background: #f8fafc;
     border-color: #e2e8f0;
     color: #cbd5e1;
     cursor: not-allowed;
@@ -170,23 +177,72 @@
 
 /* Info */
 .infoText {
-    font-size: 12px;
+    font-size: 13px;
     color: #64748b;
     text-align: center;
-    padding-top: 14px;
+    padding-top: 20px;
+    margin-top: 8px;
     border-top: 1px dashed #e2e8f0;
+    line-height: 1.5;
 }
 
-/* Mobile */
-@media (max-width: 480px) {
+/* Mobile Optimization */
+@media (max-width: 640px) {
     .container {
-        padding: 16px;
+        padding: 20px 16px;
         border-radius: 14px;
     }
 
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .dateStrip {
+        gap: 8px;
+        margin: 0 -16px;
+        padding: 0 16px;
+        margin-bottom: 20px;
+    }
+
     .dateCard {
-        min-width: 58px;
-        padding: 10px 6px;
+        min-width: 68px;
+        padding: 12px 10px;
+    }
+
+    .dayNum {
+        font-size: 20px;
+    }
+
+    .slotGroupTitle {
+        font-size: 14px;
+        margin-top: 20px;
+        margin-bottom: 12px;
+    }
+
+    .slotsGrid {
+        gap: 8px;
+    }
+
+    .slotBtn {
+        padding: 10px 14px;
+        font-size: 12px;
+        min-width: 80px;
+        border-radius: 8px;
+    }
+
+    .infoText {
+        font-size: 12px;
+        padding-top: 16px;
+    }
+}
+
+/* Extra small mobile */
+@media (max-width: 380px) {
+    .dateCard {
+        min-width: 60px;
+        padding: 10px 8px;
     }
 
     .dayNum {
@@ -194,7 +250,8 @@
     }
 
     .slotBtn {
-        padding: 8px 12px;
+        padding: 10px 12px;
         font-size: 11px;
+        min-width: 72px;
     }
 }

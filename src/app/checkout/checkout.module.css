@@ -383,9 +383,73 @@
     box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
-/* Mobile */
-@media (max-width: 480px) {
+/* Mobile Optimization */
+@media (max-width: 640px) {
     .container {
         padding: 16px 14px 160px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .orderSummary {
+        padding: 14px 16px;
+    }
+
+    .section {
+        padding: 18px 16px;
+        border-radius: 14px;
+    }
+
+    .sectionTitle {
+        font-size: 15px;
+        margin-bottom: 14px;
+    }
+
+    .input {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    .paymentBtn {
+        padding: 14px;
+    }
+
+    .paymentLabel {
+        font-size: 14px;
+    }
+
+    .payBtn {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 380px) {
+    .container {
+        padding: 14px 12px 150px;
+    }
+
+    .header {
+        gap: 10px;
+    }
+
+    .backBtn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .section {
+        padding: 16px 14px;
+    }
+
+    .paymentIcon {
+        width: 32px;
     }
 }
