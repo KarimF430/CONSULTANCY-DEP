@@ -21,12 +21,18 @@ export default function FeedbackForm() {
 
         setIsSubmitting(true);
 
-        // Simulate API call (replace with actual endpoint)
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const response = await fetch('/api/feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ feedback, name, email }),
+            });
 
-            // TODO: Send to your API or Google Sheets
-            console.log('Feedback submitted:', { feedback, name, email });
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to submit');
+            }
 
             toast.success('Thank you for your feedback! 🙏');
             setIsSubmitted(true);
