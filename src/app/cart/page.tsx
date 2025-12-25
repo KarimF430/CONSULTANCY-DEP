@@ -6,6 +6,7 @@ import Link from 'next/link';
 import styles from './cart.module.css';
 import { useCart } from '@/context/CartContext';
 import ExitIntentModal from '@/components/ExitIntentModal';
+import AddMoreModal from '@/components/AddMoreModal';
 
 export default function CartPage() {
     const router = useRouter();
@@ -13,6 +14,9 @@ export default function CartPage() {
     const [couponInput, setCouponInput] = useState('');
     const [couponError, setCouponError] = useState('');
     const [couponSuccess, setCouponSuccess] = useState(false);
+
+    // Add More Modal
+    const [showAddMoreModal, setShowAddMoreModal] = useState(false);
 
     // Exit Intent
     const [showExitModal, setShowExitModal] = useState(false);
@@ -130,12 +134,12 @@ export default function CartPage() {
                 {/* Add More Plans */}
                 <div className={styles.addMoreSection}>
                     <span className={styles.addMoreText}>Missed something?</span>
-                    <Link href="/plans" className={styles.addMoreBtn}>
+                    <button onClick={() => setShowAddMoreModal(true)} className={styles.addMoreBtn}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M12 5v14M5 12h14" />
                         </svg>
                         Add More Plans
-                    </Link>
+                    </button>
                 </div>
 
                 {/* Coupon Section */}
@@ -224,6 +228,11 @@ export default function CartPage() {
                 onStay={handleExitStay}
                 onLeave={handleExitLeave}
                 isExpertView={false}
+            />
+
+            <AddMoreModal
+                isOpen={showAddMoreModal}
+                onClose={() => setShowAddMoreModal(false)}
             />
         </>
     );
