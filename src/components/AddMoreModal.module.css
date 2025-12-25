@@ -138,9 +138,13 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background: #f59e0b;
+    background: #0f172a;
     color: white;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.badgePreferred {
+    background: #f59e0b;
 }
 
 .badgeHurry {
@@ -161,7 +165,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
     background: #f8fafc;
     border-radius: 12px;
     border: 1px solid #f1f5f9;
