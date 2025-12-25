@@ -5,6 +5,7 @@ import Image from 'next/image';
 import styles from './plans.module.css';
 import ConsultationModal from '../ConsultationModal';
 import Footer from '@/components/Footer';
+import ExitIntentModal from '@/components/ExitIntentModal';
 
 const plans = [
     {
@@ -128,11 +129,29 @@ export default function PlansPage() {
     const [selectedExpert, setSelectedExpert] = useState<typeof experts[0] | null>(null);
     const topRef = useRef<HTMLDivElement>(null);
 
+    // Exit Intent Modal State
+    const [showExitModal, setShowExitModal] = useState(false);
+    const [exitContext, setExitContext] = useState<'expert' | 'generic' | 'switch'>('generic');
+    const pendingLeaveAction = useRef<(() => void) | null>(null);
+    const isLeavingIntentionally = useRef(false);
+
+    // Track if we've initialized the history state for the main page
+    const hasInitializedHistory = useRef(false);
+
+    // Initial History Push for Global Page Exit Intent
+    useEffect(() => {
+        if (!hasInitializedHistory.current && typeof window !== 'undefined') {
+            // Push a state so we can intercept the first 'back' action
+            window.history.pushState({ page: 'plans' }, '');
+            hasInitializedHistory.current = true;
+        }
+    }, []);
+
     const handleExpertClick = (expert: typeof experts[0]) => {
         console.log('Setting pendingBooking for:', expert.name);
         setSelectedExpert(expert);
 
-        // Add history state so "Back" button works
+        // Add history state specific to expert view
         if (typeof window !== 'undefined') {
             window.history.pushState({ expertView: true }, '');
             localStorage.setItem('pendingBooking', JSON.stringify({ expertName: expert.name }));
@@ -142,20 +161,27 @@ export default function PlansPage() {
         topRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    // Handle Browser Back Button
+    // Handle Browser Back Button with Custom Modal
     useEffect(() => {
         const handlePopState = (event: PopStateEvent) => {
-            if (selectedExpert) {
-                // User pressed back. Confirm exit.
-                const shouldLeave = confirm(`Wait! 🛑\n\n${selectedExpert.name.split(' ')[0]} has limited slots available today.\n\nAre you sure you want to leave without booking?`);
-
-                if (shouldLeave) {
-                    setSelectedExpert(null);
-                } else {
-                    // User wants to stay, push state back so forward button isn't needed
-                    window.history.pushState({ expertView: true }, '');
-                }
+            // If user is intentionally leaving, let them go
+            if (isLeavingIntentionally.current) {
+                isLeavingIntentionally.current = false;
+                return;
             }
+
+            // Show custom modal instead of confirm
+            setExitContext(selectedExpert ? 'expert' : 'generic');
+            pendingLeaveAction.current = () => {
+                if (selectedExpert) {
+                    setSelectedExpert(null);
+                }
+            };
+            setShowExitModal(true);
+
+            // Immediately push state back to prevent navigation while modal is open
+            const state = selectedExpert ? { expertView: true } : { page: 'plans' };
+            window.history.pushState(state, '');
         };
 
         window.addEventListener('popstate', handlePopState);
@@ -163,13 +189,35 @@ export default function PlansPage() {
     }, [selectedExpert]);
 
     const handleClearExpert = () => {
-        // Exit Intent Popup for manual button
-        if (confirm(`Wait! 🛑\n\n${selectedExpert?.name.split(' ')[0]} has limited slots available today.\n\nAre you sure you want to leave without booking?`)) {
+        // Exit Intent Popup for manual button (Expert View -> Plans View)
+        setExitContext('switch');
+        pendingLeaveAction.current = () => {
             setSelectedExpert(null);
-            // If we have history state, we might want to go back to avoid zombie state, but keeping it simple
             if (typeof window !== 'undefined' && window.history.state?.expertView) {
+                isLeavingIntentionally.current = true;
                 window.history.back();
             }
+        };
+        setShowExitModal(true);
+    };
+
+    // Exit Modal Handlers
+    const handleExitStay = () => {
+        setShowExitModal(false);
+        pendingLeaveAction.current = null;
+    };
+
+    const handleExitLeave = () => {
+        setShowExitModal(false);
+
+        if (pendingLeaveAction.current) {
+            pendingLeaveAction.current();
+            pendingLeaveAction.current = null;
+        }
+
+        // If leaving the page entirely, navigate to home
+        if (exitContext === 'generic') {
+            window.location.href = '/';
         }
     };
 
@@ -277,6 +325,14 @@ export default function PlansPage() {
                 )}
 
                 <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+                <ExitIntentModal
+                    isOpen={showExitModal}
+                    onStay={handleExitStay}
+                    onLeave={handleExitLeave}
+                    expertName={selectedExpert?.name.split(' ')[0]}
+                    isExpertView={exitContext === 'expert' || exitContext === 'switch'}
+                />
             </div>
             <Footer />
         </>
