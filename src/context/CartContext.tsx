@@ -13,15 +13,23 @@ interface Plan {
     badge?: string;
 }
 
+interface UserInfo {
+    name: string;
+    phone: string;
+    email: string;
+}
+
 interface CartContextType {
     selectedPlan: Plan | null;
     couponCode: string;
     discount: number;
+    userInfo: UserInfo | null;
     addToCart: (plan: Plan) => void;
     removeFromCart: () => void;
     applyCoupon: (code: string) => boolean;
     clearCoupon: () => void;
     getTotal: () => number;
+    setUserInfo: (info: UserInfo) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -38,6 +46,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
     const [couponCode, setCouponCode] = useState('');
     const [discount, setDiscount] = useState(0);
+    const [userInfo, setUserInfoState] = useState<UserInfo | null>(null);
 
     const addToCart = (plan: Plan) => {
         setSelectedPlan(plan);
@@ -69,16 +78,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return Math.max(0, selectedPlan.price - discount);
     };
 
+    const setUserInfo = (info: UserInfo) => {
+        setUserInfoState(info);
+    };
+
     return (
         <CartContext.Provider value={{
             selectedPlan,
             couponCode,
             discount,
+            userInfo,
             addToCart,
             removeFromCart,
             applyCoupon,
             clearCoupon,
             getTotal,
+            setUserInfo,
         }}>
             {children}
         </CartContext.Provider>

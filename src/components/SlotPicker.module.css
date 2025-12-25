@@ -1,0 +1,191 @@
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #64748b;
+}
+
+.timezone {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+/* Date Strip */
+.dateStrip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 24px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.dateStrip::-webkit-scrollbar {
+    display: none;
+}
+
+.dateCard {
+    flex: 0 0 auto;
+    min-width: 70px;
+    padding: 12px 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.dateCard:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+}
+
+.dateCardActive {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border-color: #2563eb;
+    color: white;
+}
+
+.dayLabel {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    color: #64748b;
+}
+
+.dateCardActive .dayLabel {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dayNum {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.dateCardActive .dayNum {
+    color: white;
+}
+
+.slotsLabel {
+    display: block;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.dateCardActive .slotsLabel {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Slots Container */
+.slotsContainer {
+    margin-bottom: 20px;
+}
+
+.slotGroupTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 12px;
+    margin-top: 20px;
+}
+
+.slotGroupTitle:first-child {
+    margin-top: 0;
+}
+
+.slotsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.slotBtn {
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: white;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.slotBtn:hover:not(:disabled) {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.slotBtnActive {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: white;
+}
+
+.slotBtnDisabled {
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+    color: #cbd5e1;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* Info */
+.infoText {
+    font-size: 13px;
+    color: #94a3b8;
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px dashed #e2e8f0;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .dateCard {
+        min-width: 60px;
+        padding: 10px 6px;
+    }
+
+    .dayNum {
+        font-size: 18px;
+    }
+
+    .slotBtn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}

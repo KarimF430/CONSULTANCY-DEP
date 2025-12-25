@@ -6,18 +6,29 @@ import Link from 'next/link';
 import styles from './checkout.module.css';
 import { useCart } from '@/context/CartContext';
 import ExitIntentModal from '@/components/ExitIntentModal';
+import SlotPicker from '@/components/SlotPicker';
 
 export default function CheckoutPage() {
     const router = useRouter();
-    const { selectedPlan, discount, getTotal } = useCart();
+    const { selectedPlan, discount, getTotal, userInfo, setUserInfo } = useCart();
 
-    // Form State
+    // Form State - Auto-fill from userInfo if available
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [timeSlot, setTimeSlot] = useState('');
+    const [selectedSlot, setSelectedSlot] = useState<{ date: string; time: string } | null>(null);
     const [paymentMethod, setPaymentMethod] = useState('upi');
     const [isProcessing, setIsProcessing] = useState(false);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    // Auto-fill from cart userInfo
+    useEffect(() => {
+        if (userInfo) {
+            setName(userInfo.name || '');
+            setPhone(userInfo.phone || '');
+            setEmail(userInfo.email || '');
+        }
+    }, [userInfo]);
 
     // Exit Intent
     const [showExitModal, setShowExitModal] = useState(false);
@@ -57,23 +68,31 @@ export default function CheckoutPage() {
         router.push('/cart');
     };
 
-    const timeSlots = [
-        { id: '1', label: 'Morning (9 AM - 12 PM)', value: 'morning' },
-        { id: '2', label: 'Afternoon (12 PM - 4 PM)', value: 'afternoon' },
-        { id: '3', label: 'Evening (4 PM - 8 PM)', value: 'evening' },
-    ];
-
     const paymentMethods = [
         { id: 'upi', label: 'UPI', icon: '📱', subLabel: 'GPay, PhonePe, Paytm' },
         { id: 'card', label: 'Credit / Debit Card', icon: '💳', subLabel: 'Visa, Mastercard, Rupay' },
         { id: 'netbanking', label: 'Net Banking', icon: '🏦', subLabel: 'All major banks' },
     ];
 
+    const validateForm = () => {
+        const newErrors: { [key: string]: string } = {};
+
+        if (!name.trim()) newErrors.name = 'Name is required';
+        if (!phone.trim()) newErrors.phone = 'Phone number is required';
+        else if (!/^[6-9]\d{9}$/.test(phone.replace(/\s/g, ''))) newErrors.phone = 'Enter valid 10-digit number';
+        if (!email.trim()) newErrors.email = 'Email is required';
+        else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Enter valid email';
+        if (!selectedSlot) newErrors.slot = 'Please select a time slot';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handlePayment = async () => {
-        if (!name || !phone || !email || !timeSlot) {
-            alert('Please fill all required fields');
-            return;
-        }
+        if (!validateForm()) return;
+
+        // Save user info for future use
+        setUserInfo({ name, phone, email });
 
         setIsProcessing(true);
 
@@ -81,7 +100,7 @@ export default function CheckoutPage() {
         await new Promise(resolve => setTimeout(resolve, 2000));
 
         // For demo, randomly succeed or fail
-        const success = Math.random() > 0.3;
+        const success = Math.random() > 0.2;
 
         if (success) {
             router.push('/order-success');
@@ -120,7 +139,7 @@ export default function CheckoutPage() {
                 {/* Order Summary */}
                 <div className={styles.orderSummary}>
                     <div className={styles.summaryHeader}>
-                        <h3>Order Summary</h3>
+                        <span className={styles.summaryLabel}>Order Summary</span>
                         <Link href="/cart" className={styles.editLink}>Edit</Link>
                     </div>
                     <div className={styles.summaryContent}>
@@ -135,7 +154,10 @@ export default function CheckoutPage() {
                 {/* Contact Details */}
                 <div className={styles.section}>
                     <h3 className={styles.sectionTitle}>
-                        <span className={styles.sectionIcon}>👤</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
                         Contact Details
                     </h3>
 
@@ -146,8 +168,9 @@ export default function CheckoutPage() {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Enter your name"
-                            className={styles.input}
+                            className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
                         />
+                        {errors.name && <span className={styles.errorText}>{errors.name}</span>}
                     </div>
 
                     <div className={styles.formGroup}>
@@ -157,8 +180,9 @@ export default function CheckoutPage() {
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             placeholder="Enter phone number"
-                            className={styles.input}
+                            className={`${styles.input} ${errors.phone ? styles.inputError : ''}`}
                         />
+                        {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
                     </div>
 
                     <div className={styles.formGroup}>
@@ -168,35 +192,28 @@ export default function CheckoutPage() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Enter email address"
-                            className={styles.input}
+                            className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
                         />
+                        {errors.email && <span className={styles.errorText}>{errors.email}</span>}
                     </div>
                 </div>
 
-                {/* Time Slot */}
-                <div className={styles.section}>
-                    <h3 className={styles.sectionTitle}>
-                        <span className={styles.sectionIcon}>⏰</span>
-                        Preferred Call Time
-                    </h3>
-
-                    <div className={styles.timeSlots}>
-                        {timeSlots.map((slot) => (
-                            <button
-                                key={slot.id}
-                                onClick={() => setTimeSlot(slot.value)}
-                                className={`${styles.timeSlotBtn} ${timeSlot === slot.value ? styles.timeSlotActive : ''}`}
-                            >
-                                {slot.label}
-                            </button>
-                        ))}
-                    </div>
+                {/* Slot Picker */}
+                <div className={styles.slotSection}>
+                    <SlotPicker
+                        selectedSlot={selectedSlot}
+                        onSelectSlot={setSelectedSlot}
+                    />
+                    {errors.slot && <span className={styles.errorText}>{errors.slot}</span>}
                 </div>
 
                 {/* Payment Methods */}
                 <div className={styles.section}>
                     <h3 className={styles.sectionTitle}>
-                        <span className={styles.sectionIcon}>💰</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                        </svg>
                         Payment Method
                     </h3>
 
@@ -222,6 +239,13 @@ export default function CheckoutPage() {
 
                 {/* Pay Button */}
                 <div className={styles.stickyFooter}>
+                    <div className={styles.footerInfo}>
+                        {selectedSlot && (
+                            <span className={styles.selectedSlotInfo}>
+                                📅 {selectedSlot.date} at {selectedSlot.time}
+                            </span>
+                        )}
+                    </div>
                     <button
                         onClick={handlePayment}
                         className={styles.payBtn}
