@@ -104,6 +104,60 @@
     color: #16a34a;
 }
 
+/* Calendly Booking Section */
+.calendlySection {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #3b82f6;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.calendlyHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: #1e40af;
+}
+
+.calendlyHeader h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.calendlyDesc {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.calendlyBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.calendlyBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.5);
+}
+
 .nextSteps {
     text-align: left;
     margin-bottom: 28px;
