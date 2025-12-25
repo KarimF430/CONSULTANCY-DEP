@@ -69,9 +69,36 @@ export default function CheckoutPage() {
     };
 
     const paymentMethods = [
-        { id: 'upi', label: 'UPI', icon: '📱', subLabel: 'GPay, PhonePe, Paytm' },
-        { id: 'card', label: 'Credit / Debit Card', icon: '💳', subLabel: 'Visa, Mastercard, Rupay' },
-        { id: 'netbanking', label: 'Net Banking', icon: '🏦', subLabel: 'All major banks' },
+        {
+            id: 'upi',
+            label: 'UPI',
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
+                </svg>
+            ),
+            subLabel: 'GPay, PhonePe, Paytm'
+        },
+        {
+            id: 'card',
+            label: 'Credit / Debit Card',
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" /><line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+            ),
+            subLabel: 'Visa, Mastercard, Rupay'
+        },
+        {
+            id: 'netbanking',
+            label: 'Net Banking',
+            icon: (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 21h18" /><path d="M3 10h18" /><path d="M5 6l7-3 7 3" /><path d="M4 10v11" /><path d="M20 10v11" /><path d="M8 14v3" /><path d="M12 14v3" /><path d="M16 14v3" />
+                </svg>
+            ),
+            subLabel: 'All major banks'
+        },
     ];
 
     const validateForm = () => {
