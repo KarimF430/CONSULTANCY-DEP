@@ -123,16 +123,48 @@ export default function CheckoutPage() {
 
         setIsProcessing(true);
 
-        // Simulate payment processing
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        try {
+            // Simulate payment processing
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
-        // For demo, randomly succeed or fail
-        const success = Math.random() > 0.2;
+            // For demo, randomly succeed or fail (80% success rate)
+            const paymentSuccess = Math.random() > 0.2;
 
-        if (success) {
+            if (!paymentSuccess) {
+                router.push('/order-failed');
+                return;
+            }
+
+            // Payment successful - Book the Calendly slot
+            const bookingResponse = await fetch('/api/calendly/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    date: selectedSlot?.date,
+                    time: selectedSlot?.time,
+                    planName: cartItems[0]?.title || 'Consultation',
+                }),
+            });
+
+            const bookingData = await bookingResponse.json();
+
+            if (bookingData.success && bookingData.schedulingUrl) {
+                // Store booking info for success page
+                sessionStorage.setItem('lastBooking', JSON.stringify({
+                    ...bookingData.booking,
+                    schedulingUrl: bookingData.schedulingUrl,
+                }));
+            }
+
             router.push('/order-success');
-        } else {
+        } catch (error) {
+            console.error('Payment/booking error:', error);
             router.push('/order-failed');
+        } finally {
+            setIsProcessing(false);
         }
     };
 

@@ -88,6 +88,56 @@
     color: #16a34a;
 }
 
+/* Calendly Section */
+.calendlySection {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.calendlyTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 10px;
+}
+
+.calendlyDesc {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.calendlyBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.calendlyBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+}
+
 .nextSteps {
     text-align: left;
     margin-bottom: 32px;
