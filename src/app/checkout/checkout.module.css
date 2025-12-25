@@ -456,3 +456,158 @@
         width: 32px;
     }
 }
+
+/* Payment Accordion Styles */
+.paymentAccordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.accordionItem {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.accordionItem:hover {
+    border-color: #cbd5e1;
+}
+
+.accordionActive {
+    border-color: #2563eb;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+.accordionHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.accordionHeader:hover {
+    background: #f8fafc;
+}
+
+.accordionLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.cardBrands {
+    display: flex;
+    gap: 6px;
+    margin-left: 8px;
+}
+
+.brandBadge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chevron {
+    transition: transform 0.2s;
+    color: #64748b;
+}
+
+.chevronUp {
+    transform: rotate(180deg);
+}
+
+.accordionContent {
+    padding: 0 16px 16px;
+    background: #fafbfc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.subOption {
+    padding: 12px 0;
+}
+
+.cardInput {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    background: white;
+    transition: border-color 0.2s;
+}
+
+.cardInput:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.cardRow {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.cardRow .cardInput {
+    flex: 1;
+}
+
+.bankOption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    margin-top: 12px;
+    background: white;
+    border: 1px dashed #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #0f172a;
+    transition: all 0.2s;
+}
+
+.bankOption:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.bankOption span:nth-child(2) {
+    flex: 1;
+}
+
+.bankIcon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+
+.bankRadio {
+    width: 18px;
+    height: 18px;
+    accent-color: #2563eb;
+}
+
+.upiInput {
+    padding-top: 16px;
+    border-top: 1px dashed #e2e8f0;
+    margin-top: 8px;
+}

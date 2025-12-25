@@ -277,34 +277,144 @@ export default function CheckoutPage() {
 
 
 
-
-                {/* Payment Methods */}
+                {/* Payment Methods - Accordion Style */}
                 <div className={styles.section}>
                     <h3 className={styles.sectionTitle}>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
                             <line x1="1" y1="10" x2="23" y2="10" />
                         </svg>
-                        Payment Method
+                        Payment Methods
                     </h3>
 
-                    <div className={styles.paymentMethods}>
-                        {paymentMethods.map((method) => (
+                    <div className={styles.paymentAccordion}>
+                        {/* Credit/Debit Cards */}
+                        <div className={`${styles.accordionItem} ${paymentMethod === 'card' ? styles.accordionActive : ''}`}>
                             <button
-                                key={method.id}
-                                onClick={() => setPaymentMethod(method.id)}
-                                className={`${styles.paymentBtn} ${paymentMethod === method.id ? styles.paymentActive : ''}`}
+                                className={styles.accordionHeader}
+                                onClick={() => setPaymentMethod(paymentMethod === 'card' ? '' : 'card')}
                             >
-                                <span className={styles.paymentIcon}>{method.icon}</span>
-                                <div className={styles.paymentInfo}>
-                                    <span className={styles.paymentLabel}>{method.label}</span>
-                                    <span className={styles.paymentSub}>{method.subLabel}</span>
+                                <div className={styles.accordionLeft}>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f172a" strokeWidth="2">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" /><line x1="1" y1="10" x2="23" y2="10" />
+                                    </svg>
+                                    <span>Credit / Debit Cards</span>
+                                    <div className={styles.cardBrands}>
+                                        <span className={styles.brandBadge} style={{ background: '#1a1f71', color: 'white' }}>VISA</span>
+                                        <span className={styles.brandBadge} style={{ background: '#eb001b', color: 'white' }}>MC</span>
+                                        <span className={styles.brandBadge} style={{ background: '#097969', color: 'white' }}>RuPay</span>
+                                    </div>
                                 </div>
-                                <div className={styles.paymentRadio}>
-                                    {paymentMethod === method.id && <div className={styles.radioInner}></div>}
-                                </div>
+                                <svg className={`${styles.chevron} ${paymentMethod === 'card' ? styles.chevronUp : ''}`} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M6 9l6 6 6-6" />
+                                </svg>
                             </button>
-                        ))}
+                            {paymentMethod === 'card' && (
+                                <div className={styles.accordionContent}>
+                                    <div className={styles.subOption}>
+                                        <input type="text" placeholder="Card Number" className={styles.cardInput} />
+                                    </div>
+                                    <div className={styles.cardRow}>
+                                        <input type="text" placeholder="MM/YY" className={styles.cardInput} />
+                                        <input type="text" placeholder="CVV" className={styles.cardInput} />
+                                    </div>
+                                    <div className={styles.subOption}>
+                                        <input type="text" placeholder="Name on Card" className={styles.cardInput} />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Net Banking */}
+                        <div className={`${styles.accordionItem} ${paymentMethod === 'netbanking' ? styles.accordionActive : ''}`}>
+                            <button
+                                className={styles.accordionHeader}
+                                onClick={() => setPaymentMethod(paymentMethod === 'netbanking' ? '' : 'netbanking')}
+                            >
+                                <div className={styles.accordionLeft}>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2">
+                                        <path d="M3 21h18" /><path d="M3 10h18" /><path d="M5 6l7-3 7 3" /><path d="M4 10v11" /><path d="M20 10v11" /><path d="M8 14v3" /><path d="M12 14v3" /><path d="M16 14v3" />
+                                    </svg>
+                                    <span>Net Banking</span>
+                                </div>
+                                <svg className={`${styles.chevron} ${paymentMethod === 'netbanking' ? styles.chevronUp : ''}`} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M6 9l6 6 6-6" />
+                                </svg>
+                            </button>
+                            {paymentMethod === 'netbanking' && (
+                                <div className={styles.accordionContent}>
+                                    {[
+                                        { name: 'ICICI Bank', color: '#f37021' },
+                                        { name: 'HDFC Bank', color: '#004c8f' },
+                                        { name: 'State Bank of India', color: '#22409a' },
+                                        { name: 'Axis Bank', color: '#97144d' },
+                                    ].map(bank => (
+                                        <label key={bank.name} className={styles.bankOption}>
+                                            <span className={styles.bankIcon} style={{ background: bank.color }}>{bank.name.charAt(0)}</span>
+                                            <span>{bank.name}</span>
+                                            <input type="radio" name="bank" className={styles.bankRadio} />
+                                        </label>
+                                    ))}
+                                    <label className={styles.bankOption}>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+                                            <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                                        </svg>
+                                        <span>All other banks</span>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </label>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* UPI */}
+                        <div className={`${styles.accordionItem} ${paymentMethod === 'upi' ? styles.accordionActive : ''}`}>
+                            <button
+                                className={styles.accordionHeader}
+                                onClick={() => setPaymentMethod(paymentMethod === 'upi' ? '' : 'upi')}
+                            >
+                                <div className={styles.accordionLeft}>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
+                                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
+                                    </svg>
+                                    <span>UPI</span>
+                                    <div className={styles.cardBrands}>
+                                        <span className={styles.brandBadge} style={{ background: '#00BAF2', color: 'white' }}>GPay</span>
+                                        <span className={styles.brandBadge} style={{ background: '#5f259f', color: 'white' }}>PhonePe</span>
+                                        <span className={styles.brandBadge} style={{ background: '#002970', color: 'white' }}>Paytm</span>
+                                    </div>
+                                </div>
+                                <svg className={`${styles.chevron} ${paymentMethod === 'upi' ? styles.chevronUp : ''}`} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M6 9l6 6 6-6" />
+                                </svg>
+                            </button>
+                            {paymentMethod === 'upi' && (
+                                <div className={styles.accordionContent}>
+                                    <label className={styles.bankOption}>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
+                                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                                        </svg>
+                                        <span>Pay by any UPI App</span>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </label>
+                                    <label className={styles.bankOption}>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+                                            <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                                        </svg>
+                                        <span>Pay by any UPI ID</span>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </label>
+                                    <div className={styles.upiInput}>
+                                        <input type="text" placeholder="Enter UPI ID (e.g., name@upi)" className={styles.cardInput} />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 
