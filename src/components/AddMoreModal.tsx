@@ -100,7 +100,9 @@ export default function AddMoreModal({ isOpen, onClose }: AddMoreModalProps) {
                                 className={`${styles.planCard} ${inCart ? styles.planCardAdded : ''}`}
                             >
                                 {plan.badge && (
-                                    <span className={styles.badge}>{plan.badge}</span>
+                                    <span className={`${styles.badge} ${plan.type === 'hurry' ? styles.badgeHurry : ''}`}>
+                                        {plan.badge}
+                                    </span>
                                 )}
 
                                 <div className={styles.planHeader}>
