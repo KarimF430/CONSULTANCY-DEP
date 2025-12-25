@@ -128,10 +128,13 @@ const experts = [
 
 export default function PlansPage() {
     const router = useRouter();
-    const { addToCart } = useCart();
+    const { addToCart, cartItems } = useCart();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedExpert, setSelectedExpert] = useState<typeof experts[0] | null>(null);
     const topRef = useRef<HTMLDivElement>(null);
+
+    // Check if plan is already in cart
+    const isInCart = (planId: number) => cartItems.some(item => item.id === planId);
 
     // Handle plan selection -> add to cart and navigate
     const handleSelectPlan = (plan: typeof plans[0]) => {
@@ -292,7 +295,19 @@ export default function PlansPage() {
 
                             <p className={styles.cardDesc}>{plan.description}</p>
 
-                            <button onClick={() => handleSelectPlan(plan)} className={styles.btnPrimary}>Select Plan</button>
+                            {isInCart(plan.id) ? (
+                                <div className={styles.inCartActions}>
+                                    <span className={styles.inCartBadge}>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        In Cart
+                                    </span>
+                                    <button onClick={() => router.push('/cart')} className={styles.btnSecondary}>View Cart</button>
+                                </div>
+                            ) : (
+                                <button onClick={() => handleSelectPlan(plan)} className={styles.btnPrimary}>Select Plan</button>
+                            )}
                         </div>
                     ))}
                 </div>
