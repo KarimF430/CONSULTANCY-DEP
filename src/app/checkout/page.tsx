@@ -135,8 +135,37 @@ export default function CheckoutPage() {
                 return;
             }
 
-            // Payment successful - Book the Calendly slot
-            const bookingResponse = await fetch('/api/calendly/book', {
+            // Payment successful - Create booking in MongoDB (LOCKS the slot)
+            const bookingResponse = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    planId: cartItems[0]?.id || 1,
+                    planName: cartItems[0]?.title || 'Consultation',
+                    planPrice: getTotal(),
+                    slotDate: selectedSlot?.date,
+                    slotTime: selectedSlot?.time,
+                    paymentMethod,
+                }),
+            });
+
+            const bookingData = await bookingResponse.json();
+
+            if (!bookingResponse.ok) {
+                // Slot might be taken by someone else
+                if (bookingData.slotTaken) {
+                    alert('This slot was just booked by someone else. Please select another slot.');
+                    setIsProcessing(false);
+                    return;
+                }
+                throw new Error(bookingData.error || 'Booking failed');
+            }
+
+            // Also get Calendly scheduling URL for calendar invite
+            const calendlyResponse = await fetch('/api/calendly/book', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -149,15 +178,22 @@ export default function CheckoutPage() {
                 }),
             });
 
-            const bookingData = await bookingResponse.json();
-
-            if (bookingData.success && bookingData.schedulingUrl) {
-                // Store booking info for success page
-                sessionStorage.setItem('lastBooking', JSON.stringify({
-                    ...bookingData.booking,
-                    schedulingUrl: bookingData.schedulingUrl,
-                }));
+            let schedulingUrl = '';
+            if (calendlyResponse.ok) {
+                const calendlyData = await calendlyResponse.json();
+                schedulingUrl = calendlyData.schedulingUrl || '';
             }
+
+            // Store booking info for success page
+            sessionStorage.setItem('lastBooking', JSON.stringify({
+                orderId: bookingData.orderId,
+                name,
+                email,
+                date: selectedSlot?.date,
+                time: selectedSlot?.time,
+                planName: cartItems[0]?.title || 'Consultation',
+                schedulingUrl,
+            }));
 
             router.push('/order-success');
         } catch (error) {

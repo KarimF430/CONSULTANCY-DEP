@@ -54,7 +54,7 @@ export default function SlotPicker({ selectedSlot, onSelectSlot }: SlotPickerPro
     const [error, setError] = useState<string | null>(null);
     const [slotCounts, setSlotCounts] = useState<{ [date: string]: number }>({});
 
-    // Fetch availability from Calendly
+    // Fetch availability from Calendly AND booked slots from MongoDB
     useEffect(() => {
         const fetchAvailability = async () => {
             setLoading(true);
@@ -64,27 +64,55 @@ export default function SlotPicker({ selectedSlot, onSelectSlot }: SlotPickerPro
             const endDate = dates[dates.length - 1].date;
 
             try {
-                const response = await fetch(
-                    `/api/calendly/availability?start_date=${startDate}&end_date=${endDate}`
-                );
+                // Fetch both Calendly availability and MongoDB booked slots in parallel
+                const [calendlyResponse, bookedResponse] = await Promise.all([
+                    fetch(`/api/calendly/availability?start_date=${startDate}&end_date=${endDate}`),
+                    fetch(`/api/bookings/check?start_date=${startDate}&end_date=${endDate}`),
+                ]);
 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch availability');
+                let calendlyData: { success: boolean; availability: AvailabilityData; error?: string } = {
+                    success: false,
+                    availability: {}
+                };
+                let bookedData: { success: boolean; bookedSlots: string[]; bookedByDate: Record<string, string[]> } = {
+                    success: false,
+                    bookedSlots: [],
+                    bookedByDate: {}
+                };
+
+                if (calendlyResponse.ok) {
+                    calendlyData = await calendlyResponse.json();
                 }
 
-                const data = await response.json();
+                if (bookedResponse.ok) {
+                    bookedData = await bookedResponse.json();
+                }
 
-                if (data.success && data.availability) {
-                    setAvailability(data.availability);
+                if (calendlyData.success && calendlyData.availability) {
+                    // Mark slots that are booked in MongoDB as unavailable
+                    const mergedAvailability: AvailabilityData = {};
 
-                    // Calculate slot counts per date
+                    Object.keys(calendlyData.availability).forEach(date => {
+                        mergedAvailability[date] = calendlyData.availability[date].map((slot: TimeSlot) => {
+                            const slotKey = `${date}|${slot.time}`;
+                            const isBookedInMongo = bookedData.bookedSlots?.includes(slotKey);
+                            return {
+                                ...slot,
+                                available: slot.available && !isBookedInMongo,
+                            };
+                        });
+                    });
+
+                    setAvailability(mergedAvailability);
+
+                    // Calculate slot counts per date (only available slots)
                     const counts: { [date: string]: number } = {};
-                    Object.keys(data.availability).forEach(date => {
-                        counts[date] = data.availability[date].filter((s: TimeSlot) => s.available).length;
+                    Object.keys(mergedAvailability).forEach(date => {
+                        counts[date] = mergedAvailability[date].filter((s: TimeSlot) => s.available).length;
                     });
                     setSlotCounts(counts);
                 } else {
-                    throw new Error(data.error || 'No availability data');
+                    throw new Error(calendlyData.error || 'No availability data');
                 }
             } catch (err) {
                 console.error('Availability fetch error:', err);
