@@ -1,13 +1,20 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Navbar.module.css";
-import { Button } from "./Button";
 
 export function Navbar() {
     return (
         <header className={styles.navbar}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <span className={styles.brandHighlight}>Car</span>Consultancy
+                    <Image
+                        src="/motoroctane-logo.png"
+                        alt="MotorOctane Logo"
+                        width={44}
+                        height={44}
+                        className={styles.logoImage}
+                    />
+                    MotorOctane
                 </Link>
                 <nav className={styles.navLinks}>
                     <Link href="/experts" className={styles.link}>
@@ -20,9 +27,6 @@ export function Navbar() {
                         Why Us
                     </Link>
                 </nav>
-                <div className={styles.actions}>
-                    <Button variant="primary">Book a Call</Button>
-                </div>
             </div>
         </header>
     );
