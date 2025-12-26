@@ -835,6 +835,36 @@
 }
 
 /* ============================================
+   CAR CARE PRODUCTS SECTION
+   ============================================ */
+.carCareSection {
+    padding: 50px 24px;
+    background: #f8fafc;
+}
+
+.carCareImageWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.carCareImage {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    object-fit: contain;
+}
+
+.carCareCta {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.carCareCta .ctaPrimary {
+    text-decoration: none;
+}
+
+/* ============================================
    SECTION 5: OWNER REVIEWS
    ============================================ */
 .reviews {

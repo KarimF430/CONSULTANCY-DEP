@@ -161,6 +161,39 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* CAR CARE PRODUCTS */}
+            <section className={styles.carCareSection}>
+                <div className={styles.sectionContainer}>
+                    <div className={styles.sectionHeader}>
+                        <span className={styles.sectionTag}>Products</span>
+                        <h2 className={styles.sectionTitle}>Our Car Care Products</h2>
+                        <p className={styles.sectionSubtitle}>
+                            Premium quality car care essentials to keep your vehicle looking showroom fresh.
+                        </p>
+                    </div>
+                    <div className={styles.carCareImageWrapper}>
+                        <Image
+                            src="/car-care-products.png"
+                            alt="MotorOctane Car Care Products"
+                            width={1200}
+                            height={600}
+                            className={styles.carCareImage}
+                            priority
+                        />
+                    </div>
+                    <div className={styles.carCareCta}>
+                        <a href="/products" className={styles.ctaPrimary}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             {/* SECTION 3: WHAT WE RESOLVE (Problems vs Solutions) */}
             <section className={styles.resolve}>
                 <div className={styles.resolveGrid}>
