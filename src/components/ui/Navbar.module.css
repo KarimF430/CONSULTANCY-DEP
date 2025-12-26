@@ -3,12 +3,21 @@
     top: 0;
     z-index: 50;
     width: 100%;
-    border-bottom: 1px solid #e5e7eb;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
+    background: #1a1a1a;
     height: 4rem;
     display: flex;
     align-items: center;
+}
+
+/* Golden gradient accent line below navbar */
+.navbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%);
 }
 
 .container {
@@ -25,14 +34,14 @@
     font-weight: 700;
     font-size: 1.25rem;
     letter-spacing: -0.02em;
-    color: #1a1a2e;
+    color: #ffffff;
     display: flex;
     align-items: center;
     gap: 0.25rem;
 }
 
 .brandHighlight {
-    color: #2474E5;
+    color: #f59e0b;
 }
 
 .navLinks {
@@ -50,12 +59,12 @@
 .link {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #444;
+    color: #ffffff;
     transition: color 0.2s;
 }
 
 .link:hover {
-    color: #2474E5;
+    color: #f59e0b;
 }
 
 .actions {

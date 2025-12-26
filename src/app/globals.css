@@ -1,14 +1,24 @@
 :root {
-    /* Brand Colors - Ditto Inspired (Light Theme) */
-    /* Primary Blue (Action/Links) */
-    --primary: 209 100% 52%;
-    /* #2474E5 - Bright Blue */
+    /* Brand Colors - MotorOctane Inspired Theme */
+    /* Primary Orange/Golden (Action/Links) */
+    --primary: 38 92% 50%;
+    /* #f59e0b - Amber/Golden */
     --primary-foreground: 0 0% 100%;
+
+    /* Secondary Red (Accents/Tags) */
+    --secondary: 0 72% 51%;
+    /* #dc2626 - Red */
 
     /* Background - Pure White */
     --background: 0 0% 100%;
     --foreground: 220 15% 15%;
     /* Near Black for text */
+
+    /* Dark Theme (Navbar/Footer) */
+    --dark: 0 0% 10%;
+    /* #1a1a1a */
+    --dark-secondary: 0 0% 18%;
+    /* #2d2d2d */
 
     /* Muted backgrounds */
     --muted: 220 14% 96%;

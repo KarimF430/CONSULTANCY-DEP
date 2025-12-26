@@ -19,41 +19,46 @@
     cursor: not-allowed;
 }
 
+/* Primary - Orange/Golden (MotorOctane style) */
 .primary {
-    background-color: #2474E5;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(36, 116, 229, 0.2);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
 }
 
 .primary:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(36, 116, 229, 0.3);
-    background-color: #1c65c9;
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
 }
 
+/* Secondary - Dark style */
 .secondary {
-    background-color: #f1f5f9;
-    color: #1a1a2e;
+    background-color: #1a1a1a;
+    color: #ffffff;
 }
 
 .secondary:hover:not(:disabled) {
-    background-color: #e2e8f0;
+    background-color: #2d2d2d;
 }
 
+/* Outline - Dark borders */
 .outline {
     background-color: transparent;
-    border: 2px solid #e5e7eb;
-    color: #1a1a2e;
+    border: 2px solid #f59e0b;
+    color: #f59e0b;
 }
 
 .outline:hover:not(:disabled) {
-    border-color: #1a1a2e;
-    background-color: #f8fafc;
+    border-color: #fbbf24;
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #fbbf24;
 }
 
+/* Ghost */
 .ghost {
     background-color: transparent;
-    color: #1a1a2e;
+    color: #1a1a1a;
 }
 
 .ghost:hover:not(:disabled) {

@@ -44,10 +44,61 @@ function OrderSuccessContent() {
 
     const handleBookSlot = () => {
         let calendlyUrl = CALENDLY_URL;
+        const params = new URLSearchParams();
+
+        // Pre-fill name and email from booking
         if (booking) {
-            const params = new URLSearchParams();
             if (booking.name) params.append('name', booking.name);
             if (booking.email) params.append('email', booking.email);
+        }
+
+        // Pre-fill consultation context from localStorage
+        if (typeof window !== 'undefined') {
+            const savedFormData = localStorage.getItem('consultationFormData');
+            if (savedFormData) {
+                try {
+                    const formData = JSON.parse(savedFormData);
+
+                    // Build context summary for "Please share anything" field
+                    const contextParts: string[] = [];
+
+                    if (formData.budget) {
+                        contextParts.push(`Budget: ${formData.budget}`);
+                    }
+                    if (formData.familySize) {
+                        contextParts.push(`Family Size: ${formData.familySize}`);
+                    }
+                    if (formData.priority1 || formData.priority2 || formData.priority3) {
+                        const priorities = [formData.priority1, formData.priority2, formData.priority3]
+                            .filter(Boolean)
+                            .join(', ');
+                        contextParts.push(`Priorities: ${priorities}`);
+                    }
+
+                    // Add shortlisted cars
+                    const cars: string[] = [];
+                    if (formData.shortlist1?.product) cars.push(formData.shortlist1.product);
+                    if (formData.shortlist2?.product) cars.push(formData.shortlist2.product);
+                    if (formData.shortlist3?.product) cars.push(formData.shortlist3.product);
+                    if (cars.length > 0) {
+                        contextParts.push(`Cars Considering: ${cars.join(', ')}`);
+                    }
+
+                    if (formData.city) {
+                        contextParts.push(`Location: ${formData.city}${formData.state ? ', ' + formData.state : ''}`);
+                    }
+
+                    // Set the a1 parameter (first custom question answer)
+                    if (contextParts.length > 0) {
+                        params.append('a1', contextParts.join(' | '));
+                    }
+                } catch (e) {
+                    console.error('Failed to parse consultation data:', e);
+                }
+            }
+        }
+
+        if (params.toString()) {
             calendlyUrl += `?${params.toString()}`;
         }
         window.open(calendlyUrl, '_blank');
@@ -111,7 +162,7 @@ function OrderSuccessContent() {
                             <polyline points="15 3 21 3 21 9" />
                             <line x1="10" y1="14" x2="21" y2="3" />
                         </svg>
-                        Book on Calendly
+                        Book Your Slots
                     </button>
                 </div>
 

@@ -36,11 +36,14 @@ interface ConsultationModalProps {
 
 const emptyShortlist = { product: '', whyThis: '', whyNot: '', comments: '' };
 
+const STORAGE_KEY = 'consultationFormData';
+
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
     const router = useRouter();
     const { setUserInfo } = useCart();
     const [step, setStep] = useState(1);
     const [submissionId, setSubmissionId] = useState<string | null>(null);
+    const [isInitialized, setIsInitialized] = useState(false);
 
     const [formData, setFormData] = useState<FormData>({
         fullName: '', email: '', whatsapp: '', city: '', pinCode: '', state: '',
@@ -49,6 +52,29 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
         shortlist2: { ...emptyShortlist },
         shortlist3: { ...emptyShortlist }
     });
+
+    // Load saved form data from localStorage on mount
+    useEffect(() => {
+        if (typeof window !== 'undefined' && !isInitialized) {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    setFormData(parsed);
+                } catch (e) {
+                    console.error('Failed to parse saved form data:', e);
+                }
+            }
+            setIsInitialized(true);
+        }
+    }, [isInitialized]);
+
+    // Save form data to localStorage whenever it changes
+    useEffect(() => {
+        if (isInitialized && typeof window !== 'undefined') {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+        }
+    }, [formData, isInitialized]);
 
     // 1. Initialize Session on Mount
     useEffect(() => {
@@ -99,9 +125,12 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Final sync ensured by Autosave, strictly navigate
-        router.push('/plans');
+        // Close modal first to prevent flash of homepage
         onClose();
+        // Navigate after a brief delay to ensure modal close animation completes
+        setTimeout(() => {
+            router.push('/plans');
+        }, 50);
     };
 
     const handleChange = (field: keyof FormData, value: string) => {

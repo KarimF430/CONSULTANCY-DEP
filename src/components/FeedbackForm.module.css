@@ -1,6 +1,6 @@
 .container {
     padding: 60px 20px;
-    background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+    background: #f8fafc;
 }
 
 .wrapper {
@@ -66,9 +66,9 @@
 .input:focus,
 .textarea:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #f59e0b;
     background: white;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
 }
 
 .input::placeholder,
@@ -100,7 +100,7 @@
     justify-content: center;
     gap: 10px;
     padding: 16px 24px;
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     color: white;
     border: none;
     border-radius: 12px;
@@ -108,13 +108,14 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
     margin-top: 8px;
 }
 
 .submitBtn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.45);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45);
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
 }
 
 .submitBtn:disabled {
@@ -185,6 +186,6 @@
 }
 
 .resetBtn:hover {
-    background: #e2e8f0;
-    color: #0f172a;
+    background: #f59e0b;
+    color: #ffffff;
 }
