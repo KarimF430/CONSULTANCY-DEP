@@ -847,9 +847,14 @@
     display: flex;
     gap: 20px;
     overflow-x: auto;
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 0 24px 20px;
+    padding: 20px 24px;
+    justify-content: flex-start;
+    max-width: 100%;
+    margin: 0 auto;
+    flex-wrap: nowrap;
 }
 
 .reviewsScroll::-webkit-scrollbar {
@@ -861,12 +866,30 @@
     -ms-overflow-style: none;
 }
 
+/* Desktop: wrap cards and center them */
+@media (min-width: 1200px) {
+    .reviewsScroll {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+        max-width: 1600px;
+        padding: 20px 60px;
+    }
+}
+
 /* Scroll indicator dots */
 .scrollDots {
     display: flex;
     justify-content: center;
     gap: 8px;
     margin-top: 24px;
+}
+
+/* Hide dots on desktop when all cards visible */
+@media (min-width: 1200px) {
+    .scrollDots {
+        display: none;
+    }
 }
 
 .scrollDot {
@@ -897,8 +920,8 @@
 }
 
 .reviewCard {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 280px;
+    max-width: 280px;
     background: #ffffff;
     border-radius: 16px;
     padding: 20px;

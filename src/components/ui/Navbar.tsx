@@ -16,17 +16,6 @@ export function Navbar() {
                     />
                     MotorOctane
                 </Link>
-                <nav className={styles.navLinks}>
-                    <Link href="/experts" className={styles.link}>
-                        Find an Expert
-                    </Link>
-                    <Link href="/cars" className={styles.link}>
-                        Car Reviews
-                    </Link>
-                    <Link href="/about" className={styles.link}>
-                        Why Us
-                    </Link>
-                </nav>
             </div>
         </header>
     );
